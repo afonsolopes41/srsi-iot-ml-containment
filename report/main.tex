@@ -121,12 +121,12 @@ Secção~\ref{sec:conclusoes} conclui.
 % Secção curta: só o necessário para perceber o resto.
 % =====================================================================
 \subsection{Ameaças em dispositivos IoT}
-% RESPONSÁVEL: Frente 2
+% RESPONSÁVEL: Frente 2 (João Alves)
 \pendente{Limitações dos dispositivos IoT; \textit{botnets} (Mirai, Torii);
 fases típicas: varrimento, força bruta, infeção, comunicação C\&C, ataque.}
 
 \subsection{Deteção de intrusões baseada em fluxos}
-% RESPONSÁVEL: Frente 2
+% RESPONSÁVEL: Frente 2 (João Alves)
 \pendente{IDS por assinaturas vs. por anomalias; o que é um fluxo; \textit{features}
 típicas; vantagem: funciona com tráfego cifrado.}
 
@@ -137,7 +137,7 @@ típicas; vantagem: funciona com tráfego cifrado.}
 ataques novos (\textit{zero-day}).}
 
 \subsection{Mecanismos de resposta e contenção}
-% RESPONSÁVEL: Frente 5
+% RESPONSÁVEL: Frente 5 (Gonçalo)
 \pendente{\textit{Firewall}/ACL, VLAN de quarentena, SDN; deteção no dispositivo,
 no \textit{gateway} (\textit{edge}) ou na \textit{cloud}.}
 
@@ -252,7 +252,7 @@ O CSV extraído está no repositório GitHub~\cite{repo}.}
 % Cada subsecção responde a UMA pergunta de pesquisa.
 % =====================================================================
 \subsection{Visão geral dos estudos (QE)}
-% RESPONSÁVEL: Frente 1
+% RESPONSÁVEL: Frente 1 (Afonso)
 \pendente{N estudos incluídos; distribuição por ano (Fig.~\ref{fig:anos}), por tipo
 de publicação e por base.}
 
@@ -264,12 +264,12 @@ publicações incluídas por ano}}}
 \end{figure}
 
 \subsection{Modelos e \textit{features} (QF1)}
-% RESPONSÁVEL: Frente 3 (com a parte não/semi-supervisionada da Frente 4)
+% RESPONSÁVEL: Frente 3 (Rafael Silva) (com a parte não/semi-supervisionada da Frente 4 (Rafael Reis))
 \pendente{Que modelos aparecem, com que frequência e com que resultados;
 \textit{features} de fluxo mais usadas.}
 
 \subsection{\textit{Datasets}, tipos de ataque e métricas (QF2)}
-% RESPONSÁVEL: Frente 2 (as equações das métricas são da Frente 3)
+% RESPONSÁVEL: Frente 2 (João Alves) (as equações das métricas são da Frente 3 (Rafael Silva))
 \pendente{\textit{Datasets} mais usados (ex.: IoT-23~\cite{iot23}, CICIoT2023, N-BaIoT, TON\_IoT)
 e porquê.}
 
@@ -291,12 +291,12 @@ FPR = \frac{FP}{FP+TN}
 \end{equation}
 
 \subsection{Mecanismos de resposta automática (QF3)}
-% RESPONSÁVEL: Frente 5
+% RESPONSÁVEL: Frente 5 (Gonçalo)
 \pendente{Quantos estudos fazem só deteção vs. deteção + resposta; que mecanismos
 (\textit{firewall}, VLAN, SDN); deteção no dispositivo, \textit{gateway} ou \textit{cloud}.}
 
 \subsection{Avaliação das soluções (QF4)}
-% RESPONSÁVEL: Frente 4
+% RESPONSÁVEL: Frente 4 (Rafael Reis)
 \pendente{Quantos estudos avaliam só \textit{offline} com \textit{datasets} vs. em simulação, protótipo ou
 \textit{hardware} real; latência e custo computacional reportados.}
 
@@ -364,7 +364,7 @@ e(x) = \frac{1}{d}\sum_{j=1}^{d}\left(x_j-\hat{x}_j\right)^2 > \theta
 \end{equation}
 
 \subsection{Avaliação planeada}
-% RESPONSÁVEL: Frente 1
+% RESPONSÁVEL: Frente 1 (Afonso)
 Os três modelos serão comparados com as métricas (\ref{eq:precrec})--(\ref{eq:fpr}) e com a
 \textit{Polygon Area Metric}~\cite{aydemir2020pam}, usada em~\cite{noetzold2026anomaly}, que
 calcula a área do polígono formado por $n$ métricas normalizadas num gráfico radar:
