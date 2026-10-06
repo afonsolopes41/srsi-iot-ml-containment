@@ -50,7 +50,7 @@ com uma sugestão de decisão baseada no título. **A decisão final é do grupo
 
 | Sugestão | Registos |
 | --- | ---: |
-| Rever resumo (65 com prioridade alta para a QF3) | 283 |
+| Rever resumo (72 com prioridade alta para a QF3) | 283 |
 | Dúvida | 1 |
 | Revisão/survey (não é estudo primário, útil para contexto) | 45 |
 | Excluir pelo título (critério indicado) | 65 |
