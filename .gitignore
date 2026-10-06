@@ -1,0 +1,23 @@
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+report/main.pdf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+
+# Dados grandes
+data/raw/
+data/*.csv
+*.pcap
+*.zip

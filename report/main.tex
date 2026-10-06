@@ -1,0 +1,396 @@
+% =====================================================================
+%  SRSI 2026/2027 — Projeto de Grupo, Parte 1 (teórica)
+%  Template IEEE (IEEEtran, conferência, duas colunas) em português
+%  Compilar: pdflatex -> bibtex -> pdflatex -> pdflatex  (ou latexmk -pdf)
+%
+%  Convenções do grupo
+%  - \pendente{...}  = texto por escrever (sai a vermelho no PDF; apagar no fim)
+%  - Cada secção tem um comentário "RESPONSÁVEL:" com a frente que a escreve
+%  - Referências: só em referencias.bib (exportadas do Zotero, estilo IEEE)
+%  - Figuras: pasta figuras/
+% =====================================================================
+\documentclass[conference,a4paper]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\renewcommand{\IEEEkeywordsname}{Palavras-chave}
+\newcommand{\pendente}[1]{\textcolor{red}{[#1]}}
+\newcommand{\checkok}{$\checkmark$} % célula "sim" nas tabelas comparativas
+\newcommand{\nao}{--}            % célula "não"
+
+\begin{document}
+
+% ---------------------------------------------------------------------
+%  CAPA (dados pedidos no template do professor)
+% ---------------------------------------------------------------------
+\title{
+  \includegraphics[width=0.42\textwidth]{figuras/logo-iscte.png}\\[6pt]
+  {\normalsize Mestrado em Engenharia de Telecomunicações e Informática\\
+   Segurança em Redes e Sistemas de Informação\\[6pt]}
+  Deteção e Contenção Automática de Dispositivos IoT Comprometidos com
+  \textit{Machine Learning}: Uma Revisão Sistemática da Literatura
+}
+
+\author{
+\IEEEauthorblockN{Afonso Duarte Rosado Lopes (122631),
+Rafael Fernandes dos Reis (122616),
+Rafael Andrade da Silva (122638),\\
+Gonçalo José Bilé Batista (122623),
+João Azinheira Alves (123488)}
+\IEEEauthorblockA{Iscte -- Instituto Universitário de Lisboa\\
+Docente: Prof. Valderi Reis Quietinho Leithardt \quad|\quad Data: \pendente{dd-mm-aa}}
+}
+
+\maketitle
+
+% ---------------------------------------------------------------------
+%  RESUMO  (máx. meia página, sem referências nem links)
+%  RESPONSÁVEL: Frente 1 (escrever no fim)
+% ---------------------------------------------------------------------
+\begin{abstract}
+\pendente{Problema (dispositivos IoT comprometidos passam despercebidos);
+o que foi feito (revisão sistemática de N artigos, segundo o protocolo X);
+principais resultados (modelos, \textit{datasets} e mecanismos de resposta mais usados;
+lacuna encontrada); proposta de solução para a Parte 2.}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Internet das Coisas, deteção de intrusões, \textit{machine learning}, \textit{botnets}, contenção automática, revisão sistemática
+\end{IEEEkeywords}
+
+% ---------------------------------------------------------------------
+%  GLOSSÁRIO (obrigatório no template do professor)
+%  RESPONSÁVEL: todos acrescentam as siglas que usam
+% ---------------------------------------------------------------------
+\section*{Glossário}
+\begin{tabular}{@{}ll@{}}
+AE    & \textit{Autoencoder} \\
+DL    & \textit{Deep Learning} \\
+IDS   & \textit{Intrusion Detection System} \\
+IF    & \textit{Isolation Forest} \\
+IoT   & \textit{Internet of Things} (Internet das Coisas) \\
+ML    & \textit{Machine Learning} \\
+PAM   & \textit{Polygon Area Metric} \\
+RF    & \textit{Random Forest} \\
+RSL   & Revisão Sistemática da Literatura \\
+SDN   & \textit{Software-Defined Networking} \\
+SRSI  & Segurança em Redes e Sistemas de Informação \\
+\end{tabular}
+
+% =====================================================================
+\section{Introdução}
+% RESPONSÁVEL: Frente 1 (Afonso)
+% Obrigatória: problema, como o vamos abordar, estrutura do documento.
+% =====================================================================
+\pendente{Contexto: crescimento da IoT, dispositivos com poucos recursos e sem
+atualizações; exemplo da \textit{botnet} Mirai~\cite{antonakakis2017mirai}.}
+
+\pendente{Problema: um dispositivo infetado continua na rede sem ser detetado; o
+tráfego de rede é o único ponto de observação.}
+
+\pendente{Ponto de partida: o trabalho de Noetzold \textit{et al.}~\cite{noetzold2026anomaly}
+deteta anomalias e gera alertas, e aponta como trabalho futuro a resposta automática
+a incidentes e a execução em \textit{edge}.}
+
+\textbf{Objetivos.} \pendente{Responder às perguntas de pesquisa da Tabela~\ref{tab:perguntas}
+e propor um sistema que deteta e isola automaticamente dispositivos IoT comprometidos.}
+
+\textbf{Contribuições.} \pendente{(i) revisão sistemática de N artigos;
+(ii) comparação do estado da arte (Tabela~\ref{tab:comparacao});
+(iii) proposta de arquitetura para a Parte 2.}
+
+\textbf{Estrutura.} A Secção~\ref{sec:fundamentos} apresenta os conceitos base.
+A Secção~\ref{sec:metodologia} descreve o protocolo da revisão sistemática.
+A Secção~\ref{sec:resultados} responde às perguntas de pesquisa e compara os
+trabalhos relacionados. A Secção~\ref{sec:proposta} apresenta a solução proposta,
+a Secção~\ref{sec:discussao} discute as lacunas e as ameaças à validade e a
+Secção~\ref{sec:conclusoes} conclui.
+
+% =====================================================================
+\section{Fundamentos}\label{sec:fundamentos}
+% Secção curta: só o necessário para perceber o resto.
+% =====================================================================
+\subsection{Ameaças em dispositivos IoT}
+% RESPONSÁVEL: Frente 2
+\pendente{Limitações dos dispositivos IoT; \textit{botnets} (Mirai, Torii);
+fases típicas: varrimento, força bruta, infeção, comunicação C\&C, ataque.}
+
+\subsection{Deteção de intrusões baseada em fluxos}
+% RESPONSÁVEL: Frente 2
+\pendente{IDS por assinaturas vs. por anomalias; o que é um fluxo; \textit{features}
+típicas; vantagem: funciona com tráfego cifrado.}
+
+\subsection{Aprendizagem automática para deteção}
+% RESPONSÁVEL: Frentes 3 e 4
+\pendente{Supervisionado (ex.: RF), não supervisionado (ex.: IF) e semi-supervisionado
+(ex.: AE): o que aprende cada um e o compromisso entre ataques conhecidos e
+ataques novos (\textit{zero-day}).}
+
+\subsection{Mecanismos de resposta e contenção}
+% RESPONSÁVEL: Frente 5
+\pendente{\textit{Firewall}/ACL, VLAN de quarentena, SDN; deteção no dispositivo,
+no \textit{gateway} (\textit{edge}) ou na \textit{cloud}.}
+
+% =====================================================================
+\section{Metodologia da revisão sistemática}\label{sec:metodologia}
+% RESPONSÁVEL: Frente 1 (Afonso)
+% Segue o protocolo do professor (perguntas -> string -> bases -> critérios ->
+% triagem -> three-pass -> extração).
+% =====================================================================
+A revisão segue o protocolo de revisão sistemática da UC, inspirado nas diretrizes de
+Kitchenham~\cite{kitchenham2007guidelines}, em quatro fases: definição das perguntas de
+pesquisa, pesquisa nas bases de dados, seleção dos estudos e extração dos dados.
+
+\subsection{Perguntas de pesquisa}
+\begin{table}[!t]
+\caption{Perguntas de pesquisa}\label{tab:perguntas}
+\centering\footnotesize
+\begin{tabular}{@{}p{0.09\columnwidth}p{0.83\columnwidth}@{}}
+\toprule
+ID & Pergunta \\
+\midrule
+QG  & Como é que a análise de tráfego com ML é usada para detetar e conter automaticamente dispositivos IoT comprometidos? \\
+QF1 & Que modelos (supervisionados, não supervisionados e semi-supervisionados) e que \textit{features} de tráfego são usados? \\
+QF2 & Que \textit{datasets} e que métricas de avaliação são usados? \\
+QF3 & Que mecanismos de resposta são propostos e onde é feita a deteção (dispositivo, \textit{gateway} ou \textit{cloud})? \\
+QE  & Quantas publicações existem por ano, por tipo de modelo e por \textit{dataset}? \\
+\bottomrule
+\end{tabular}
+\end{table}
+\pendente{Uma frase sobre a Tabela~\ref{tab:perguntas} e, se quiserem, o enquadramento PIPOC
+(População: redes IoT; Intervenção: deteção com ML; Comparação: tipos de modelos;
+Resultado: deteção e contenção; Contexto: \textit{gateway}/\textit{edge}).}
+
+\subsection{\textit{String} de busca e bases de dados}
+A \textit{string} de busca junta quatro grupos de termos com AND, cada um com os seus sinónimos ligados por OR:
+\begin{quote}\footnotesize\raggedright
+(``internet of things'' OR ``IoT'') AND (``intrusion detection'' OR ``anomaly detection'' OR
+``malware detection'' OR ``botnet detection'') AND (``machine learning'' OR ``deep learning'')
+AND (``mitigation'' OR ``quarantine'' OR ``automated response'' OR ``intrusion prevention'' OR ``countermeasure'')
+\end{quote}
+\pendente{Atualizar com a versão final da \textit{string}.}
+
+\begin{table}[!t]
+\caption{Bases de dados pesquisadas}\label{tab:bases}
+\centering\footnotesize
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.45\columnwidth}r@{}}
+\toprule
+Base & Campos pesquisados & Resultados \\
+\midrule
+IEEE Xplore         & resumo & 139 \\
+ACM Digital Library & resumo & 34 \\
+Scopus              & resumo & 342 \\
+ScienceDirect & resumo & 148 \\
+MDPI                & resumo & 14 \\
+\midrule
+\textbf{Total}      & & \textbf{677} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\pendente{Rever: pesquisa feita a 06/10/2026, só no resumo, entre 2020 e 2026; no Scopus,
+apenas \textit{Article} e \textit{Conference paper}; no ACM, coleção \textit{ACM Guide to Computing
+Literature}. No ScienceDirect foi usada uma versão reduzida da \textit{string} por causa do
+limite de operadores booleanos.}
+
+
+\subsection{Critérios de inclusão e exclusão}
+\begin{table}[!t]
+\caption{Critérios de inclusão (IC) e de exclusão (EC)}\label{tab:criterios}
+\centering\footnotesize
+\begin{tabular}{@{}p{0.09\columnwidth}p{0.83\columnwidth}@{}}
+\toprule
+ID & Critério \\
+\midrule
+IC1 & Publicado em revista, conferência ou \textit{workshop} com revisão por pares \\
+IC2 & Escrito em inglês \\
+IC3 & Publicado entre 2020 e 2026 \\
+IC4 & Contém os termos da \textit{string} de busca \\
+\midrule
+EC1 & Não responde a nenhuma pergunta de pesquisa \\
+EC2 & Não é sobre IoT ou ambientes semelhantes \\
+EC3 & A deteção não se baseia em tráfego de rede \\
+EC4 & Sem avaliação experimental \\
+EC5 & Duplicado \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Processo de seleção}
+Os resultados foram importados para o Parsifal. A seleção decorreu em três etapas:
+remoção de duplicados (EC5), leitura do título e do resumo (EC1--EC3) e leitura
+\textit{three-pass}~\cite{keshav2007read} (EC1--EC4). A Fig.~\ref{fig:selecao} resume o processo.
+
+\begin{figure}[!t]
+\centering
+\fbox{\parbox[c][3.2cm][c]{0.9\columnwidth}{\centering\pendente{Fluxograma da seleção:
+n.º de artigos por base $\rightarrow$ duplicados $\rightarrow$ título/resumo $\rightarrow$
+\textit{three-pass} $\rightarrow$ incluídos (como na figura do protocolo do professor)}}}
+\caption{Processo de seleção dos estudos.}\label{fig:selecao}
+\end{figure}
+
+\subsection{Extração de dados}
+\pendente{Campos do formulário do Parsifal: referência, ano, tipo de publicação,
+\textit{dataset}, \textit{features}, modelo, tipo de aprendizagem, métricas e resultados,
+local da deteção, mecanismo de resposta, tempo real, \textit{hardware}, limitações.
+O CSV extraído está no repositório GitHub~\cite{repo}.}
+
+% =====================================================================
+\section{Resultados da revisão}\label{sec:resultados}
+% Cada subsecção responde a UMA pergunta de pesquisa.
+% =====================================================================
+\subsection{Visão geral dos estudos (QE)}
+% RESPONSÁVEL: Frente 1
+\pendente{N estudos incluídos; distribuição por ano (Fig.~\ref{fig:anos}), por tipo
+de publicação e por base.}
+
+\begin{figure}[!t]
+\centering
+\fbox{\parbox[c][3cm][c]{0.9\columnwidth}{\centering\pendente{Gráfico de barras:
+publicações incluídas por ano}}}
+\caption{Estudos incluídos por ano de publicação.}\label{fig:anos}
+\end{figure}
+
+\subsection{Modelos e \textit{features} (QF1)}
+% RESPONSÁVEL: Frentes 3 (supervisionados) e 4 (não/semi-supervisionados)
+\pendente{Que modelos aparecem, com que frequência e com que resultados;
+\textit{features} de fluxo mais usadas.}
+
+\subsection{\textit{Datasets} e métricas de avaliação (QF2)}
+% RESPONSÁVEL: Frente 2 (datasets) e Frente 3 (métricas)
+\pendente{\textit{Datasets} mais usados (ex.: IoT-23~\cite{iot23}, CICIoT2023, N-BaIoT, TON\_IoT)
+e porquê.}
+
+As métricas mais usadas derivam da matriz de confusão, onde TP, FP, FN e TN são os
+verdadeiros positivos, falsos positivos, falsos negativos e verdadeiros negativos:
+\begin{equation}
+\mathrm{Precision}=\frac{TP}{TP+FP},\qquad \mathrm{Recall}=\frac{TP}{TP+FN}
+\label{eq:precrec}
+\end{equation}
+\begin{equation}
+F_1 = \frac{2\cdot \mathrm{Precision}\cdot \mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}}
+\label{eq:f1}
+\end{equation}
+Num sistema que isola dispositivos, a taxa de falsos positivos mede o custo de
+isolar um dispositivo legítimo:
+\begin{equation}
+FPR = \frac{FP}{FP+TN}
+\label{eq:fpr}
+\end{equation}
+
+\subsection{Mecanismos de resposta e local da deteção (QF3)}
+% RESPONSÁVEL: Frente 5
+\pendente{Quantos estudos fazem só deteção vs. deteção + resposta; que mecanismos
+(\textit{firewall}, VLAN, SDN); deteção no dispositivo, \textit{gateway} ou \textit{cloud}.}
+
+\subsection{Comparação com o estado da arte}
+% RESPONSÁVEL: Frente 1 (Afonso) — vale 9 dos 18 valores do relatório!
+% Uma linha por estudo incluído. \checkok = sim, \nao = não.
+\begin{table*}[!t]
+\caption{Comparação dos trabalhos relacionados}\label{tab:comparacao}
+\centering\footnotesize
+\begin{tabular}{@{}lllcccccc@{}}
+\toprule
+Referência & \textit{Dataset} & Modelo(s) & Superv. & Não superv. & Fluxos de rede & \textit{Gateway}/\textit{edge} & Resposta automática & Tempo real \\
+\midrule
+Noetzold \textit{et al.}~\cite{noetzold2026anomaly} & CICIDS2017, outros & BiLSTM, CNN, RNN-CNN & \checkok & \nao & \checkok & \nao & \nao & \checkok \\
+\pendente{Autor \textit{et al.} [x]} & \pendente{} & \pendente{} & \pendente{} & \pendente{} & \pendente{} & \pendente{} & \pendente{} & \pendente{} \\
+\pendente{\dots} & & & & & & & & \\
+\midrule
+\textbf{Este trabalho} & IoT-23 & RF, IF, AE & \checkok & \checkok & \checkok & \checkok & \checkok & \checkok \\
+\bottomrule
+\end{tabular}
+\end{table*}
+\pendente{Ler a tabela: que combinação nenhum estudo cobre (a lacuna).
+Confirmar as células do artigo do professor.}
+
+% =====================================================================
+\section{Solução proposta}\label{sec:proposta}
+% Ponte para a Parte 2. RESPONSÁVEL: Frente 1 (arquitetura) + Frentes 3, 4, 5
+% =====================================================================
+\subsection{Arquitetura}
+\pendente{Os quatro módulos no \textit{gateway}: captura, extração de \textit{features}
+(Zeek), deteção, contenção (nftables). Cenário em contentores Docker.}
+
+\begin{figure}[!t]
+\centering
+\fbox{\parbox[c][3.2cm][c]{0.9\columnwidth}{\centering\pendente{Diagrama da arquitetura:
+dispositivos IoT $\rightarrow$ \textit{gateway} (Zeek $\rightarrow$ detetor $\rightarrow$ nftables)
+$\rightarrow$ Internet}}}
+\caption{Arquitetura do sistema proposto.}\label{fig:arquitetura}
+\end{figure}
+
+\subsection{Modelos de deteção}
+% RESPONSÁVEL: Frentes 3 e 4
+As \textit{features} numéricas de cada fluxo são normalizadas para $[0,1]$:
+\begin{equation}
+x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}
+\label{eq:minmax}
+\end{equation}
+
+\pendente{Random Forest: uma frase.}
+
+O \textit{Isolation Forest}~\cite{liu2008isolation} atribui a cada amostra $x$ um
+\textit{score} de anomalia a partir do comprimento médio do caminho $h(x)$ necessário
+para a isolar, numa amostra de $n$ observações:
+\begin{equation}
+s(x,n) = 2^{-\frac{E[h(x)]}{c(n)}},\qquad c(n) = 2H(n-1) - \frac{2(n-1)}{n}
+\label{eq:iforest}
+\end{equation}
+onde $H(i)\approx \ln(i)+0{,}5772$. Valores de $s$ próximos de 1 indicam anomalia.
+
+O \textit{Autoencoder} é treinado só com tráfego normal. Um fluxo com $d$ \textit{features}
+é considerado anómalo quando o erro de reconstrução ultrapassa o limiar $\theta$:
+\begin{equation}
+e(x) = \frac{1}{d}\sum_{j=1}^{d}\left(x_j-\hat{x}_j\right)^2 > \theta
+\label{eq:ae}
+\end{equation}
+
+\subsection{Avaliação planeada}
+% RESPONSÁVEL: Frente 1
+Os três modelos serão comparados com as métricas (\ref{eq:precrec})--(\ref{eq:fpr}) e com a
+\textit{Polygon Area Metric}~\cite{aydemir2020pam}, usada em~\cite{noetzold2026anomaly}, que
+calcula a área do polígono formado por $n$ métricas normalizadas num gráfico radar:
+\begin{equation}
+PAM = \frac{1}{2}\left|\sum_{i=1}^{n}\left(x_i y_{i+1}-y_i x_{i+1}\right)\right|
+\label{eq:pam}
+\end{equation}
+Será ainda medido o tempo até à contenção, desde o início do ataque até ao isolamento
+do dispositivo:
+\begin{equation}
+T_c = t_{\text{isolamento}} - t_{\text{ataque}} = T_{\text{deteção}} + T_{\text{resposta}}
+\label{eq:tc}
+\end{equation}
+
+% =====================================================================
+\section{Discussão}\label{sec:discussao}
+% RESPONSÁVEL: todos (cada um 1 parágrafo sobre a sua frente)
+% =====================================================================
+\subsection{Lacunas e oportunidades}
+\pendente{O que falta na literatura e como a solução proposta responde.}
+
+\subsection{Ameaças à validade}
+\pendente{\textit{String} pode ter deixado estudos de fora; só artigos em inglês;
+subjetividade da triagem (mitigada com dupla verificação dos casos duvidosos).}
+
+% =====================================================================
+\section{Conclusões e trabalhos futuros}\label{sec:conclusoes}
+% RESPONSÁVEL: Frente 1 (Afonso). Obrigatória.
+% =====================================================================
+\pendente{Resposta curta à QG; principais conclusões de QF1--QF3; trabalho futuro =
+implementação e avaliação do protótipo (Parte 2).}
+
+% ---------------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}
+
+\end{document}
