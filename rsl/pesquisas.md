@@ -52,26 +52,13 @@ Revisões lidas e decisões sobre a string: (preencher)
 
 ## Exportações
 
-Ficheiros BibTeX (com resumo) em `exports/`, um por base: `ieee.bib`, `acm.bib`, `scopus.bib`,
-`sciencedirect.bib`, `mdpi.bib`. Importados no Parsifal, cada um associado à sua base.
+Ficheiros BibTeX exportados de cada base (com resumo), **sem alterações**, em `exports/`, com os nomes originais.
+Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 
-## Problemas nas exportações (06/10)
-
-- **ScienceDirect:** o ficheiro só tem **25 dos 148** resultados (só a primeira página foi exportada). Falta exportar o resto.
-- **ACM:** 10 dos 34 registos vieram **sem resumo**.
-
-## Pré-triagem (06/10)
-
-Ficheiro `pretriagem.csv`: registos únicos depois de juntar as cinco bases e remover duplicados (por DOI e por título),
-com uma sugestão de decisão baseada no título. **A decisão final é do grupo**, na coluna "Decisão final".
-
-| Sugestão | Registos |
-| --- | ---: |
-| Rever resumo (72 com prioridade alta para a QF3) | 283 |
-| Dúvida | 1 |
-| Revisão/survey (não é estudo primário, útil para contexto) | 45 |
-| Excluir pelo título (critério indicado) | 65 |
-| **Total de registos únicos** | **394** |
+- **IEEE Xplore:** exporta no máximo 100 registos de cada vez, por isso tem dois ficheiros (139 registos).
+- **ScienceDirect:** exporta uma página de cada vez, por isso tem seis ficheiros. Juntos têm 143 dos 148 resultados (a base não exportou 5 registos).
+- **ACM:** 10 dos 34 registos vieram sem resumo; decidem-se pelo título ou abrindo o artigo.
+- Exportações da pesquisa secundária em `exports/secundaria/` (não entram na triagem).
 
 ## Funil de seleção (preencher)
 
