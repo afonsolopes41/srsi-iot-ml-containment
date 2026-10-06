@@ -48,7 +48,24 @@ filtros (resumo, 2020–2026). Serve só para encontrar revisões já publicadas
 | MDPI | 0 |
 | **Total** | **10** |
 
-Revisões lidas e decisões sobre a string: (preencher)
+Revisões lidas: Kandah et al. (2025), Bhardwaj et al. (2025), Vera-Mundaca et al. (2024) e Negera et al. (2022,
+da pesquisa principal).
+
+Decisões (06/10/2026):
+- **String principal mantém-se.** As 8 revisões únicas da pesquisa secundária já constavam dos resultados da principal,
+  e os termos que usam (mitigation, countermeasures, prevention) já estão cobertos.
+- **Perguntas refinadas:** QF2 passa a incluir tipos de ataque; QF3 passa a incluir onde a resposta é aplicada
+  (incluindo controlador SDN) e como é desencadeada; nova QF4 sobre o tipo de avaliação (offline vs tempo real/protótipo)
+  e custo computacional.
+
+## Perguntas de pesquisa (versão final)
+
+- **QG** — Como é que a análise de tráfego com ML é usada para detetar e conter automaticamente dispositivos IoT comprometidos?
+- **QF1** — Que modelos (supervisionados, não supervisionados, semi-supervisionados) e que features de tráfego são usados?
+- **QF2** — Que datasets, tipos de ataque e métricas de avaliação são usados?
+- **QF3** — Que mecanismos de resposta automática são propostos, onde são aplicados (dispositivo, gateway/edge, controlador SDN ou cloud) e como são desencadeados?
+- **QF4** — As soluções são avaliadas apenas offline, com datasets, ou também em tempo real ou num protótipo, e com que custo computacional?
+- **QE** — Quantas publicações existem por ano, por tipo de modelo e por dataset?
 
 ## Exportações
 

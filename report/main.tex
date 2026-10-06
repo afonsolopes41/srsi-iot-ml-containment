@@ -161,12 +161,15 @@ ID & Pergunta \\
 \midrule
 QG  & Como é que a análise de tráfego com ML é usada para detetar e conter automaticamente dispositivos IoT comprometidos? \\
 QF1 & Que modelos (supervisionados, não supervisionados e semi-supervisionados) e que \textit{features} de tráfego são usados? \\
-QF2 & Que \textit{datasets} e que métricas de avaliação são usados? \\
-QF3 & Que mecanismos de resposta são propostos e onde é feita a deteção (dispositivo, \textit{gateway} ou \textit{cloud})? \\
+QF2 & Que \textit{datasets}, tipos de ataque e métricas de avaliação são usados? \\
+QF3 & Que mecanismos de resposta automática são propostos, onde são aplicados (dispositivo, \textit{gateway}/\textit{edge}, controlador SDN ou \textit{cloud}) e como são desencadeados? \\
+QF4 & As soluções são avaliadas apenas \textit{offline}, com \textit{datasets}, ou também em tempo real ou num protótipo, e com que custo computacional? \\
 QE  & Quantas publicações existem por ano, por tipo de modelo e por \textit{dataset}? \\
 \bottomrule
 \end{tabular}
 \end{table}
+As perguntas foram refinadas depois da leitura de revisões sistemáticas encontradas com a \textit{string} secundária
+(QF2 passou a incluir os tipos de ataque, QF3 o local e o modo de desencadear a resposta, e foi acrescentada a QF4).
 \pendente{Uma frase sobre a Tabela~\ref{tab:perguntas} e, se quiserem, o enquadramento PIPOC
 (População: redes IoT; Intervenção: deteção com ML; Comparação: tipos de modelos;
 Resultado: deteção e contenção; Contexto: \textit{gateway}/\textit{edge}).}
@@ -261,12 +264,12 @@ publicações incluídas por ano}}}
 \end{figure}
 
 \subsection{Modelos e \textit{features} (QF1)}
-% RESPONSÁVEL: Frentes 3 (supervisionados) e 4 (não/semi-supervisionados)
+% RESPONSÁVEL: Frente 3 (com a parte não/semi-supervisionada da Frente 4)
 \pendente{Que modelos aparecem, com que frequência e com que resultados;
 \textit{features} de fluxo mais usadas.}
 
-\subsection{\textit{Datasets} e métricas de avaliação (QF2)}
-% RESPONSÁVEL: Frente 2 (datasets) e Frente 3 (métricas)
+\subsection{\textit{Datasets}, tipos de ataque e métricas (QF2)}
+% RESPONSÁVEL: Frente 2 (as equações das métricas são da Frente 3)
 \pendente{\textit{Datasets} mais usados (ex.: IoT-23~\cite{iot23}, CICIoT2023, N-BaIoT, TON\_IoT)
 e porquê.}
 
@@ -287,10 +290,15 @@ FPR = \frac{FP}{FP+TN}
 \label{eq:fpr}
 \end{equation}
 
-\subsection{Mecanismos de resposta e local da deteção (QF3)}
+\subsection{Mecanismos de resposta automática (QF3)}
 % RESPONSÁVEL: Frente 5
 \pendente{Quantos estudos fazem só deteção vs. deteção + resposta; que mecanismos
 (\textit{firewall}, VLAN, SDN); deteção no dispositivo, \textit{gateway} ou \textit{cloud}.}
+
+\subsection{Avaliação das soluções (QF4)}
+% RESPONSÁVEL: Frente 4
+\pendente{Quantos estudos avaliam só \textit{offline} com \textit{datasets} vs. em simulação, protótipo ou
+\textit{hardware} real; latência e custo computacional reportados.}
 
 \subsection{Comparação com o estado da arte}
 % RESPONSÁVEL: Frente 1 (Afonso) — vale 9 dos 18 valores do relatório!
