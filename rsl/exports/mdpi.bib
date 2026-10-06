@@ -1,0 +1,230 @@
+
+@Article{app16031665,
+AUTHOR = {Rasool, Ariwan M. and Safa, Nader Sohrabi and Mbarushimana, Consolee},
+TITLE = {Towards Privacy-Preserving Deep Learning for Intelligent IoT Botnet Detection},
+JOURNAL = {Applied Sciences},
+VOLUME = {16},
+YEAR = {2026},
+NUMBER = {3},
+ARTICLE-NUMBER = {1665},
+URL = {https://www.mdpi.com/2076-3417/16/3/1665},
+ISSN = {2076-3417},
+ABSTRACT = {Internet of Things (IoT) botnets are networks of infected smart devices controlled by attackers and posing a serious cybersecurity challenge. Developing detection approaches that maintain high accuracy while protecting privacy presents considerable challenges, particularly in large and heterogeneous IoT networks. This paper empirically compares three modelling approaches on Bot-IoT and N-BaIoT in binary and multiclass settings: handcrafted machine learning with random forest (RF), centralised deep learning (CDL) with DNN/LSTM/BiLSTM, and federated deep learning (FDL) with the same architectures. Model hyperparameters are selected via randomised search on stratified subsets and then fixed for final training. Results show near-perfect performance for all approaches in binary detection: on Bot-IoT, CDL-DNN attains perfect accuracy, and RF is virtually perfect (only four benign-to-attack false positives), while FDL models are similarly strong with only small false-positive and false-negative counts. On N-BaIoT, RF and CDL (especially LSTM) are near-perfect, and FDL is very close to CDL. For multiclass detection, CDL-DNN leads on Bot-IoT, RF remains near perfect with minimal cross-class confusion, and FDL trails slightly; on N-BaIoT, FDL-BiLSTM and RF are essentially perfect, with CDL-LSTM close behind. Overall, the findings validate RF as a competitive classical approach, show where centralised representation learning adds value, and demonstrate that federated training preserves most of the centralised accuracy while avoiding raw data centralization (data locality) for scalable deployment.},
+DOI = {10.3390/app16031665}
+}
+
+
+
+@Article{s22103895,
+AUTHOR = {Wazzan, Majda and Algazzawi, Daniyal and Albeshri, Aiiad and Hasan, Syed and Rabie, Osama and Asghar, Muhammad Zubair},
+TITLE = {Cross Deep Learning Method for Effectively Detecting the Propagation of IoT Botnet},
+JOURNAL = {Sensors},
+VOLUME = {22},
+YEAR = {2022},
+NUMBER = {10},
+ARTICLE-NUMBER = {3895},
+URL = {https://www.mdpi.com/1424-8220/22/10/3895},
+PubMedID = {35632306},
+ISSN = {1424-8220},
+ABSTRACT = {In recent times, organisations in a variety of businesses, such as healthcare, education, and others, have been using the Internet of Things (IoT) to produce more competent and improved services. The widespread use of IoT devices makes our lives easier. On the other hand, the IoT devices that we use suffer vulnerabilities that may impact our lives. These unsafe devices accelerate and ease cybersecurity attacks, specifically when using a botnet. Moreover, restrictions on IoT device resources, such as limitations in power consumption and the central processing unit and memory, intensify this issue because they limit the security techniques that can be used to protect IoT devices. Fortunately, botnets go through different stages before they can start attacks, and they can be detected in the early stage. This research paper proposes a framework focusing on detecting an IoT botnet in the early stage. An empirical experiment was conducted to investigate the behaviour of the early stage of the botnet, and then a baseline machine learning model was implemented for early detection. Furthermore, the authors developed an effective detection method, namely, Cross CNN_LSTM, to detect the IoT botnet based on using fusion deep learning models of a convolutional neural network (CNN) and long short-term memory (LSTM). According to the conducted experiments, the results show that the suggested model is accurate and outperforms some of the state-of-the-art methods, and it achieves 99.7 accuracy. Finally, the authors developed a kill chain model to prevent IoT botnet attacks in the early stage.},
+DOI = {10.3390/s22103895}
+}
+
+
+
+@Article{electronics10091104,
+AUTHOR = {Popoola, Segun I. and Adebisi, Bamidele and Ande, Ruth and Hammoudeh, Mohammad and Atayero, Aderemi A.},
+TITLE = {Memory-Efficient Deep Learning for Botnet Attack Detection in IoT Networks},
+JOURNAL = {Electronics},
+VOLUME = {10},
+YEAR = {2021},
+NUMBER = {9},
+ARTICLE-NUMBER = {1104},
+URL = {https://www.mdpi.com/2079-9292/10/9/1104},
+ISSN = {2079-9292},
+ABSTRACT = {Cyber attackers exploit a network of compromised computing devices, known as a botnet, to attack Internet-of-Things (IoT) networks. Recent research works have recommended the use of Deep Recurrent Neural Network (DRNN) for botnet attack detection in IoT networks. However, for high feature dimensionality in the training data, high network bandwidth and a large memory space will be needed to transmit and store the data, respectively in IoT back-end server or cloud platform for Deep Learning (DL). Furthermore, given highly imbalanced network traffic data, the DRNN model produces low classification performance in minority classes. In this paper, we exploit the joint advantages of Long Short-Term Memory Autoencoder (LAE), Synthetic Minority Oversampling Technique (SMOTE), and DRNN to develop a memory-efficient DL method, named LS-DRNN. The effectiveness of this method is evaluated with the Bot-IoT dataset. Results show that the LAE method reduced the dimensionality of network traffic features in the training set from 37 to 10, and this consequently reduced the memory space required for data storage by 86.49%. SMOTE method helped the LS-DRNN model to achieve high classification performance in minority classes, and the overall detection rate increased by 10.94%. Furthermore, the LS-DRNN model outperformed state-of-the-art models.},
+DOI = {10.3390/electronics10091104}
+}
+
+
+
+@Article{computers15010026,
+AUTHOR = {Babenko, Tetiana and Kolesnikova, Kateryna and Bakhtiyarova, Yelena and Yeskendirova, Damelya and Sansyzbay, Kanibek and Sysoyev, Askar and Kruchinin, Oleksandr},
+TITLE = {Hybrid GNN–LSTM Architecture for Probabilistic IoT Botnet Detection with Calibrated Risk Assessment},
+JOURNAL = {Computers},
+VOLUME = {15},
+YEAR = {2026},
+NUMBER = {1},
+ARTICLE-NUMBER = {26},
+URL = {https://www.mdpi.com/2073-431X/15/1/26},
+ISSN = {2073-431X},
+ABSTRACT = {Detecting botnets in IoT environments is difficult because most intrusion detection systems treat network events as independent observations. In practice, infections spread through device relationships and evolve through distinct temporal phases. A system that ignores either aspect will miss important patterns. This paper explores a hybrid architecture combining Graph Neural Networks with Long Short-Term Memory networks to capture both structural and temporal dynamics. The GNN component models behavioral similarity between traffic flows in feature space, while the LSTM tracks how patterns change as attacks progress. The two components are trained jointly so that relational context is preserved during temporal learning. We evaluated the approach on two datasets with different characteristics. N-BaIoT contains traffic from nine devices infected with Mirai and BASHLITE, while CICIoT2023 covers 105 devices across 33 attack types. On N-BaIoT, the model achieved 99.88% accuracy with F1 of 0.9988 and Brier score of 0.0015. Cross-validation on CICIoT2023 yielded 99.73% accuracy with Brier score of 0.0030. The low Brier scores suggest that probability outputs are reasonably well calibrated for risk-based decision making. Consistent performance across both datasets provides some evidence that the architecture generalizes beyond a single benchmark setting.},
+DOI = {10.3390/computers15010026}
+}
+
+
+
+@Article{electronics10161876,
+AUTHOR = {Apostol, Ioana and Preda, Marius and Nila, Constantin and Bica, Ion},
+TITLE = {IoT Botnet Anomaly Detection Using Unsupervised Deep Learning},
+JOURNAL = {Electronics},
+VOLUME = {10},
+YEAR = {2021},
+NUMBER = {16},
+ARTICLE-NUMBER = {1876},
+URL = {https://www.mdpi.com/2079-9292/10/16/1876},
+ISSN = {2079-9292},
+ABSTRACT = {The Internet of Things has become a cutting-edge technology that is continuously evolving in size, connectivity, and applicability. This ecosystem makes its presence felt in every aspect of our lives, along with all other emerging technologies. Unfortunately, despite the significant benefits brought by the IoT, the increased attack surface built upon it has become more critical than ever. Devices have limited resources and are not typically created with security features. Lately, a trend of botnet threats transitioning to the IoT environment has been observed, and an army of infected IoT devices can expand quickly and be used for effective attacks. Therefore, identifying proper solutions for securing IoT systems is currently an important and challenging research topic. Machine learning-based approaches are a promising alternative, allowing the identification of abnormal behaviors and the detection of attacks. This paper proposes an anomaly-based detection solution that uses unsupervised deep learning techniques to identify IoT botnet activities. An empirical evaluation of the proposed method is conducted on both balanced and unbalanced datasets to assess its threat detection capability. False-positive rate reduction and its impact on the detection system are also analyzed. Furthermore, a comparison with other unsupervised learning approaches is included. The experimental results reveal the performance of the proposed detection method.},
+DOI = {10.3390/electronics10161876}
+}
+
+
+
+@Article{s25247553,
+AUTHOR = {Wakili, Almustapha A. and Guni, Saugat and Khan, Sabbir Ahmed and Yu, Wei and Jung, Woosub},
+TITLE = {Advancing Machine Learning Strategies for Power Consumption-Based IoT Botnet Detection},
+JOURNAL = {Sensors},
+VOLUME = {25},
+YEAR = {2025},
+NUMBER = {24},
+ARTICLE-NUMBER = {7553},
+URL = {https://www.mdpi.com/1424-8220/25/24/7553},
+PubMedID = {41471557},
+ISSN = {1424-8220},
+ABSTRACT = {The proliferation of Internet of Things (IoT) devices has amplified botnet risks, while traditional network-based intrusion detection systems (IDSs) struggle under encrypted and/or sparse traffic. Power consumption offers an effective side channel for device-level detection. Yet, prior studies typically focus on a single model family (often a convolutional neural network (CNN)) and rarely assess generalization across devices or compare broader model classes. In this paper, we conduct unified benchmarking and comparison of classical (SVM and RF), deep (CNN, LSTM, and 1D Transformer), and hybrid (CNN + LSTM, CNN + Transformer, and CNN + RF) models on the CHASE’19 dataset and a newly curated three-class botnet dataset, using consistent preprocessing and evaluation across single- and cross-device settings, reporting both accuracy and efficiency (latency and throughput). Experimental results demonstrate that Random Forest achieves the highest single-device accuracy (99.43% on the Voice Assistant with Seed 42), while CNN + Transformer shows a strong accuracy–efficiency trade-off in cross-device scenarios (94.02% accuracy on the combined dataset at ∼60,000 samples/s when using the best-performing Seed 42). These results offer practical guidance for selecting models under accuracy, latency, and throughput constraints and establish a reproducible baseline for power-side-channel IDSs.},
+DOI = {10.3390/s25247553}
+}
+
+
+
+@Article{app13020837,
+AUTHOR = {Catillo, Marta and Pecchia, Antonio and Villano, Umberto},
+TITLE = {A Deep Learning Method for Lightweight and Cross-Device IoT Botnet Detection},
+JOURNAL = {Applied Sciences},
+VOLUME = {13},
+YEAR = {2023},
+NUMBER = {2},
+ARTICLE-NUMBER = {837},
+URL = {https://www.mdpi.com/2076-3417/13/2/837},
+ISSN = {2076-3417},
+ABSTRACT = {Ensuring security of Internet of Things (IoT) devices in the face of threats and attacks is a primary concern. IoT plays an increasingly key role in cyber–physical systems. Many existing intrusion detection systems (IDS) proposals for the IoT leverage complex machine learning architectures, which often provide one separate model per device or per attack. These solutions are not suited to the scale and dynamism of modern IoT networks. This paper proposes a novel IoT-driven cross-device method, which allows learning a single IDS model instead of many separate models atop the traffic of different IoT devices. A semi-supervised approach is adopted due to its wider applicability for unanticipated attacks. The solution is based on an all-in-one deep autoencoder, which consists of training a single deep neural network with the normal traffic from different IoT devices. Extensive experimentation performed with a widely used benchmarking dataset indicates that the all-in-one approach achieves within 0.9994–0.9997 recall, 0.9999–1.0 precision, 0.0–0.0071 false positive rate and 0.9996–0.9998 F1 score, depending on the device. The results obtained demonstrate the validity of the proposal, which represents a lightweight and device-independent solution with considerable advantages in terms of transferability and adaptability.},
+DOI = {10.3390/app13020837}
+}
+
+
+
+@Article{electronics11203411,
+AUTHOR = {S. Alrayes, Fatma and Maray, Mohammed and Gaddah, Abdulbaset and Yafoz, Ayman and Alsini, Raed and Alghushairy, Omar and Mohsen, Heba and Motwakel, Abdelwahed},
+TITLE = {Modeling of Botnet Detection Using Barnacles Mating Optimizer with Machine Learning Model for Internet of Things Environment},
+JOURNAL = {Electronics},
+VOLUME = {11},
+YEAR = {2022},
+NUMBER = {20},
+ARTICLE-NUMBER = {3411},
+URL = {https://www.mdpi.com/2079-9292/11/20/3411},
+ISSN = {2079-9292},
+ABSTRACT = {Owing to the development and expansion of energy-aware sensing devices and autonomous and intelligent systems, the Internet of Things (IoT) has gained remarkable growth and found uses in several day-to-day applications. However, IoT devices are highly prone to botnet attacks. To mitigate this threat, a lightweight and anomaly-based detection mechanism that can create profiles for malicious and normal actions on IoT networks could be developed. Additionally, the massive volume of data generated by IoT gadgets could be analyzed by machine learning (ML) methods. Recently, several deep learning (DL)-related mechanisms have been modeled to detect attacks on the IoT. This article designs a botnet detection model using the barnacles mating optimizer with machine learning (BND-BMOML) for the IoT environment. The presented BND-BMOML model focuses on the identification and recognition of botnets in the IoT environment. To accomplish this, the BND-BMOML model initially follows a data standardization approach. In the presented BND-BMOML model, the BMO algorithm is employed to select a useful set of features. For botnet detection, the BND-BMOML model in this study employs an Elman neural network (ENN) model. Finally, the presented BND-BMOML model uses a chicken swarm optimization (CSO) algorithm for the parameter tuning process, demonstrating the novelty of the work. The BND-BMOML method was experimentally validated using a benchmark dataset and the outcomes indicated significant improvements in performance over existing methods.},
+DOI = {10.3390/electronics11203411}
+}
+
+
+
+@Article{s22249837,
+AUTHOR = {Negera, Worku Gachena and Schwenker, Friedhelm and Debelee, Taye Girma and Melaku, Henock Mulugeta and Ayano, Yehualashet Megeresa},
+TITLE = {Review of Botnet Attack Detection in SDN-Enabled IoT Using Machine Learning},
+JOURNAL = {Sensors},
+VOLUME = {22},
+YEAR = {2022},
+NUMBER = {24},
+ARTICLE-NUMBER = {9837},
+URL = {https://www.mdpi.com/1424-8220/22/24/9837},
+PubMedID = {36560204},
+ISSN = {1424-8220},
+ABSTRACT = {The orchestration of software-defined networks (SDN) and the internet of things (IoT) has revolutionized the computing fields. These include the broad spectrum of connectivity to sensors and electronic appliances beyond standard computing devices. However, these networks are still vulnerable to botnet attacks such as distributed denial of service, network probing, backdoors, information stealing, and phishing attacks. These attacks can disrupt and sometimes cause irreversible damage to several sectors of the economy. As a result, several machine learning-based solutions have been proposed to improve the real-time detection of botnet attacks in SDN-enabled IoT networks. The aim of this review is to investigate research studies that applied machine learning techniques for deterring botnet attacks in SDN-enabled IoT networks. Initially the first major botnet attacks in SDN-IoT networks have been thoroughly discussed. Secondly a commonly used machine learning techniques for detecting and mitigating botnet attacks in SDN-IoT networks are discussed. Finally, the performance of these machine learning techniques in detecting and mitigating botnet attacks is presented in terms of commonly used machine learning models’ performance metrics. Both classical machine learning (ML) and deep learning (DL) techniques have comparable performance in botnet attack detection. However, the classical ML techniques require extensive feature engineering to achieve optimal features for efficient botnet attack detection. Besides, they fall short of detecting unforeseen botnet attacks. Furthermore, timely detection, real-time monitoring, and adaptability to new types of attacks are still challenging tasks in classical ML techniques. These are mainly because classical machine learning techniques use signatures of the already known malware both in training and after deployment.},
+DOI = {10.3390/s22249837}
+}
+
+
+
+@Article{iot7020041,
+AUTHOR = {Wasswa, Hassan and Lynar, Timothy},
+TITLE = {Hybrid Deep Architectures in Contrastive Latent Space: Performance Analysis of VAE-MLP, VAE-MoTE, and VAE-GAT for IoT Botnet Detection},
+JOURNAL = {IoT},
+VOLUME = {7},
+YEAR = {2026},
+NUMBER = {2},
+ARTICLE-NUMBER = {41},
+URL = {https://www.mdpi.com/2624-831X/7/2/41},
+ISSN = {2624-831X},
+ABSTRACT = {The rapid proliferation of Internet of Things (IoT) devices has significantly expanded the attack surface of modern networks leading to a surge in IoT-based botnet attacks. Detecting such attacks remains challenging due to the high dimensionality and heterogeneity of IoT network traffic. This study proposes and evaluates three hybrid deep learning architectures for IoT botnet detection that combine representation learning with supervised classification: VAE-encoder-MLP, VAE-encoder-GAT, and VAE-encoder-MoTE. A Variational Autoencoder is initially trained to learn a compact latent representation of the high-dimensional traffic features. Subsequently, the pretrained VAE-encoder component is employed to project the data into a lower-dimensional embedding space. These embeddings are then used to train three different downstream classifiers: a multilayer perceptron (MLP), a graph attention network (GAT), and a mixture of tiny experts (MoTE) model. To further enhance representation discriminability, supervised contrastive learning is incorporated to encourage intra-class compactness and inter-class separability. The proposed architectures are evaluated on two widely studied benchmark datasets—the CICIoT2022 and N-BaIoT dataset—under both binary and multiclass classification settings. Experimental results demonstrate that all three models achieve near-perfect performance in binary attack detection, with accuracy exceeding 99.8%. In the more challenging multiclass scenario, the VAE-encoder-MLP model achieves the best overall performance, reaching accuracies of 98.55% on CICIoT2022 and 99.75% on N-BaIoT. These findings provide insights into the design of efficient and scalable deep learning architectures for IoT intrusion detection.},
+DOI = {10.3390/iot7020041}
+}
+
+
+
+@Article{app10197009,
+AUTHOR = {Kim, Jiyeon and Shim, Minsun and Hong, Seungah and Shin, Yulim and Choi, Eunjung},
+TITLE = {Intelligent Detection of IoT Botnets Using Machine Learning and Deep Learning},
+JOURNAL = {Applied Sciences},
+VOLUME = {10},
+YEAR = {2020},
+NUMBER = {19},
+ARTICLE-NUMBER = {7009},
+URL = {https://www.mdpi.com/2076-3417/10/19/7009},
+ISSN = {2076-3417},
+ABSTRACT = {As the number of Internet of Things (IoT) devices connected to the network rapidly increases, network attacks such as flooding and Denial of Service (DoS) are also increasing. These attacks cause network disruption and denial of service to IoT devices. However, a large number of heterogenous devices deployed in the IoT environment make it difficult to detect IoT attacks using traditional rule-based security solutions. It is challenging to develop optimal security models for each type of the device. Machine learning (ML) is an alternative technique that allows one to develop optimal security models based on empirical data from each device. We employ the ML technique for IoT attack detection. We focus on botnet attacks targeting various IoT devices and develop ML-based models for each type of device. We use the N-BaIoT dataset generated by injecting botnet attacks (Bashlite and Mirai) into various types of IoT devices, including a Doorbell, Baby Monitor, Security Camera, and Webcam. We develop a botnet detection model for each device using numerous ML models, including deep learning (DL) models. We then analyze the effective models with a high detection F1-score by carrying out multiclass classification, as well as binary classification, for each model.},
+DOI = {10.3390/app10197009}
+}
+
+
+
+@Article{su16146219,
+AUTHOR = {Gupta, Brij B. and Gaurav, Akshat and Attar, Razaz Waheeb and Arya, Varsha and Alhomoud, Ahmed and Chui, Kwok Tai},
+TITLE = {Sustainable IoT Security in Entrepreneurship: Leveraging Univariate Feature Selection and Deep CNN Model for Innovation and Knowledge},
+JOURNAL = {Sustainability},
+VOLUME = {16},
+YEAR = {2024},
+NUMBER = {14},
+ARTICLE-NUMBER = {6219},
+URL = {https://www.mdpi.com/2071-1050/16/14/6219},
+ISSN = {2071-1050},
+ABSTRACT = {Due to the rapid increase in Internet of Things (IoT) devices in entrepreneurial environments, innovative cybersecurity advancements are needed to defend against escalating cyber threats. The present paper proposes an approach involving univariate feature selection leading to Sustainable IoT security. This method aims at increasing the efficiency and accuracy of the deep Convolutional Neural Network (CNN) model concerning botnet attack detection and mitigation. The approach to obtaining Sustainable IoT Security goes beyond the focus on technical aspects by proving that increased cybersecurity in IoT environments also fosters entrepreneurship in terms of stimulation, knowledge increase, and innovation. This approach is a major step towards providing entrepreneurs with the necessary tools to protect them in this digital era, which will enable and support the defense against cyber threats. A secure, innovative, and knowledgeable entrepreneurial environment is the result of Sustainable IoT security.},
+DOI = {10.3390/su16146219}
+}
+
+
+
+@Article{s20216336,
+AUTHOR = {Alqahtani, Mnahi and Mathkour, Hassan and Ben Ismail, Mohamed Maher},
+TITLE = {IoT Botnet Attack Detection Based on Optimized Extreme Gradient Boosting and Feature Selection},
+JOURNAL = {Sensors},
+VOLUME = {20},
+YEAR = {2020},
+NUMBER = {21},
+ARTICLE-NUMBER = {6336},
+URL = {https://www.mdpi.com/1424-8220/20/21/6336},
+PubMedID = {33172023},
+ISSN = {1424-8220},
+ABSTRACT = {Nowadays, Internet of Things (IoT) technology has various network applications and has attracted the interest of many research and industrial communities. Particularly, the number of vulnerable or unprotected IoT devices has drastically increased, along with the amount of suspicious activity, such as IoT botnet and large-scale cyber-attacks. In order to address this security issue, researchers have deployed machine and deep learning methods to detect attacks targeting compromised IoT devices. Despite these efforts, developing an efficient and effective attack detection approach for resource-constrained IoT devices remains a challenging task for the security research community. In this paper, we propose an efficient and effective IoT botnet attack detection approach. The proposed approach relies on a Fisher-score-based feature selection method along with a genetic-based extreme gradient boosting (GXGBoost) model in order to determine the most relevant features and to detect IoT botnet attacks. The Fisher score is a representative filter-based feature selection method used to determine significant features and discard irrelevant features through the minimization of intra-class distance and the maximization of inter-class distance. On the other hand, GXGBoost is an optimal and effective model, used to classify the IoT botnet attacks. Several experiments were conducted on a public botnet dataset of IoT devices. The evaluation results obtained using holdout and 10-fold cross-validation techniques showed that the proposed approach had a high detection rate using only three out of the 115 data traffic features and improved the overall performance of the IoT botnet attack detection process.},
+DOI = {10.3390/s20216336}
+}
+
+
+
+@Article{s21092985,
+AUTHOR = {Popoola, Segun I. and Adebisi, Bamidele and Ande, Ruth and Hammoudeh, Mohammad and Anoh, Kelvin and Atayero, Aderemi A.},
+TITLE = {SMOTE-DRNN: A Deep Learning Algorithm for Botnet Detection in the Internet-of-Things Networks},
+JOURNAL = {Sensors},
+VOLUME = {21},
+YEAR = {2021},
+NUMBER = {9},
+ARTICLE-NUMBER = {2985},
+URL = {https://www.mdpi.com/1424-8220/21/9/2985},
+PubMedID = {33923151},
+ISSN = {1424-8220},
+ABSTRACT = {Nowadays, hackers take illegal advantage of distributed resources in a network of computing devices (i.e., botnet) to launch cyberattacks against the Internet of Things (IoT). Recently, diverse Machine Learning (ML) and Deep Learning (DL) methods were proposed to detect botnet attacks in IoT networks. However, highly imbalanced network traffic data in the training set often degrade the classification performance of state-of-the-art ML and DL models, especially in classes with relatively few samples. In this paper, we propose an efficient DL-based botnet attack detection algorithm that can handle highly imbalanced network traffic data. Specifically, Synthetic Minority Oversampling Technique (SMOTE) generates additional minority samples to achieve class balance, while Deep Recurrent Neural Network (DRNN) learns hierarchical feature representations from the balanced network traffic data to perform discriminative classification. We develop DRNN and SMOTE-DRNN models with the Bot-IoT dataset, and the simulation results show that high-class imbalance in the training data adversely affects the precision, recall, F1 score, area under the receiver operating characteristic curve (AUC), geometric mean (GM) and Matthews correlation coefficient (MCC) of the DRNN model. On the other hand, the SMOTE-DRNN model achieved better classification performance with 99.50% precision, 99.75% recall, 99.62% F1 score, 99.87% AUC, 99.74% GM and 99.62% MCC. Additionally, the SMOTE-DRNN model outperformed state-of-the-art ML and DL models.},
+DOI = {10.3390/s21092985}
+}
+
+
+

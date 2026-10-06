@@ -20,10 +20,7 @@ Telecomunicações e Informática, Iscte, 2026/2027. Docente: Prof. Valderi Leit
 | Pasta | Conteúdo |
 | --- | --- |
 | `report/` | Parte 1 — relatório em LaTeX (template IEEE) |
-| `rsl/` | Revisão sistemática: registo das pesquisas, exportações BibTeX, dados extraídos do Parsifal |
-| `data/` | Parte 2 — scripts de preparação do dataset IoT-23 |
-| `models/` | Parte 2 — Random Forest, Isolation Forest e Autoencoder |
-| `testbed/` | Parte 2 — cenário Docker (gateway, dispositivos IoT, atacante) e contenção com nftables |
+| `rsl/` | Revisão sistemática: registo das pesquisas, exportações BibTeX, pré-triagem e dados extraídos do Parsifal |
 
 ## Entregas
 
