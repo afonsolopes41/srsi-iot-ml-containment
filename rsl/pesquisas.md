@@ -33,6 +33,23 @@ AND ("machine learning" OR "deep learning")
 AND ("mitigation" OR "intrusion prevention" OR "automated response")
 ```
 
+## Pesquisa secundária (06/10/2026) — revisões sistemáticas
+
+String principal + `AND ("systematic literature" OR "systematic review" OR "literature review")`, com os mesmos
+filtros (resumo, 2020–2026). Serve só para encontrar revisões já publicadas e validar a string; estes artigos
+**não** entram na triagem.
+
+| Base | Resultados |
+| --- | ---: |
+| IEEE Xplore | 2 |
+| ACM Digital Library | 0 |
+| Scopus | 8 |
+| ScienceDirect | 0 (a confirmar) |
+| MDPI | 0 |
+| **Total** | **10** |
+
+Revisões lidas e decisões sobre a string: (preencher)
+
 ## Exportações
 
 Ficheiros BibTeX (com resumo) em `exports/`, um por base: `ieee.bib`, `acm.bib`, `scopus.bib`,
