@@ -81,8 +81,32 @@ Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 
 | Etapa | Artigos |
 | --- | ---: |
-| Resultados exportados | 554 (falta o resto do ScienceDirect) |
-| Após remover duplicados (EC5) | 394 |
+| Resultados exportados | 677 |
+| Após remover duplicados (EC5) | 508 (Parsifal: 169 duplicados) |
 | Após título/resumo (EC1–EC4) | |
-| Após three-pass (EC1–EC4) | |
+| Após EC6 (resposta/contenção) | |
+| Após quality assessment (≥ 5/8) | |
 | Incluídos | |
+
+### Por bloco
+
+| Bloco | Responsável | Únicos | Título/resumo | EC6 | Dúvidas | QA ≥ 5 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| IEEE + ACM | Afonso | 170 | 83 (+25 dúvidas) | 34 | 12 | |
+
+## Critério EC6 (refinamento)
+
+Acrescentado depois da primeira leitura dos resumos: **EC6, o estudo não propõe nem avalia um mecanismo de resposta ou contenção automática.** Muitos estudos só tratavam a deteção e referiam a mitigação de passagem, sem responderem à questão geral (detetar **e** conter).
+
+## Quality Assessment (Parsifal)
+
+Respostas: Sim = 1, Parcialmente = 0,5, Não = 0. Pontuação máxima 8, mínimo para incluir 5.
+
+1. Os objetivos e a contribuição do estudo estão claramente definidos?
+2. O modelo de ML e as features de tráfego estão descritos com detalhe suficiente para se reproduzir? (QF1)
+3. O estudo usa um dataset identificado e público, ou disponibiliza o seu? (QF2)
+4. Reporta métricas além da accuracy (precision, recall, F1, FPR)? (QF2)
+5. O mecanismo de resposta ou contenção é descrito e avaliado, e não só mencionado? (QF3)
+6. A solução é testada em tempo real, num protótipo ou num testbed, e não só offline? (QF4)
+7. Reporta o custo computacional (latência, CPU, memória)? (QF4)
+8. Discute as limitações do trabalho?

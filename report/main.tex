@@ -224,14 +224,21 @@ EC2 & Não é sobre IoT ou ambientes semelhantes \\
 EC3 & A deteção não se baseia em tráfego de rede \\
 EC4 & Sem avaliação experimental \\
 EC5 & Duplicado \\
+EC6 & Não propõe nem avalia um mecanismo de resposta ou contenção automática \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Processo de seleção}
-Os resultados foram importados para o Parsifal. A seleção decorreu em três etapas:
-remoção de duplicados (EC5), leitura do título e do resumo (EC1--EC3) e leitura
-\textit{three-pass}~\cite{keshav2007read} (EC1--EC4). A Fig.~\ref{fig:selecao} resume o processo.
+Os resultados foram importados para o Parsifal. A seleção decorreu em quatro etapas:
+remoção de duplicados (EC5), leitura do título e do resumo (EC1--EC4),
+aplicação do critério EC6 e primeira passagem do método
+\textit{three-pass}~\cite{keshav2007read}, acompanhada de uma avaliação de qualidade.
+O EC6 foi acrescentado depois da primeira leitura dos resumos, como refinamento
+do protocolo: muitos estudos só tratavam a deteção e referiam a mitigação de passagem,
+sem responderem à questão geral, que trata de detetar \textbf{e} conter.
+A avaliação de qualidade usa oito perguntas (Sim = 1, Parcialmente = 0,5, Não = 0),
+com uma pontuação mínima de 5 em 8. A Fig.~\ref{fig:selecao} resume o processo.
 
 \begin{figure}[!t]
 \centering
