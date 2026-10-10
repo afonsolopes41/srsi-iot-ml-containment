@@ -93,7 +93,9 @@ Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 
 | Bloco | Responsável | Únicos | Título/resumo | EC6 | Dúvidas | QA ≥ 5 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| IEEE + ACM | Afonso | 170 | 83 (+25 dúvidas) | 34 | 12 | |
+| IEEE + ACM | Afonso | 170 | 83 (+25 dúvidas) | 39 aceites, 131 rejeitados | 0 | |
+
+Rejeitados do bloco IEEE + ACM por critério: EC1 = 18, EC2 = 9, EC3 = 9, EC4 = 33, EC6 = 62.
 
 ## Critério EC6 (refinamento)
 
