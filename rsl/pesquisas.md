@@ -81,8 +81,9 @@ Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 
 | Etapa | Artigos |
 | --- | ---: |
-| Resultados exportados | 677 |
-| Após remover duplicados (EC5) | 508 (Parsifal: 169 duplicados) |
+| Resultados nas bases | 677 |
+| Importados no Parsifal ("All") | 660 |
+| Após remover duplicados (EC5) | 558 (Parsifal: 102 duplicados) |
 | Após título/resumo (EC1–EC4) | |
 | Após EC6 (resposta/contenção) | |
 | Após quality assessment (≥ 5/8) | |
