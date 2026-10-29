@@ -44,7 +44,7 @@ filtros (resumo, 2020–2026). Serve só para encontrar revisões já publicadas
 | IEEE Xplore | 2 |
 | ACM Digital Library | 0 |
 | Scopus | 8 |
-| ScienceDirect | 0 (a confirmar) |
+| ScienceDirect | 0 |
 | MDPI | 0 |
 | **Total** | **10** |
 
@@ -58,14 +58,10 @@ Decisões (06/10/2026):
   (incluindo controlador SDN) e como é desencadeada; nova QF4 sobre o tipo de avaliação (offline vs tempo real/protótipo)
   e custo computacional.
 
-## Perguntas de pesquisa (versão final)
+## Protocolo
 
-- **QG** — Como é que a análise de tráfego com ML é usada para detetar e conter automaticamente dispositivos IoT comprometidos?
-- **QF1** — Que modelos (supervisionados, não supervisionados, semi-supervisionados) e que features de tráfego são usados?
-- **QF2** — Que datasets, tipos de ataque e métricas de avaliação são usados?
-- **QF3** — Que mecanismos de resposta automática são propostos, onde são aplicados (dispositivo, gateway/edge, controlador SDN ou cloud) e como são desencadeados?
-- **QF4** — As soluções são avaliadas apenas offline, com datasets, ou também em tempo real ou num protótipo, e com que custo computacional?
-- **QE** — Quantas publicações existem por ano, por tipo de modelo e por dataset?
+As perguntas de pesquisa finais, o PICOC, os critérios de inclusão e exclusão e as perguntas da avaliação de
+qualidade estão no protocolo exportado do Parsifal (`protocolo_parsifal.docx`).
 
 ## Exportações
 
@@ -77,39 +73,23 @@ Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 - **ACM:** 10 dos 34 registos vieram sem resumo; decidem-se pelo título ou abrindo o artigo.
 - Exportações da pesquisa secundária em `exports/secundaria/` (não entram na triagem).
 
-## Funil de seleção (preencher)
+## Funil de seleção
 
 | Etapa | Artigos |
 | --- | ---: |
 | Resultados nas bases | 677 |
 | Importados no Parsifal ("All") | 660 |
-| Após remover duplicados (EC5) | 558 (Parsifal: 102 duplicados) |
-| Após título/resumo (EC1–EC4) | |
-| Após EC6 (resposta/contenção) | |
-| Após quality assessment (≥ 5/8) | |
-| Incluídos | |
-
-### Por bloco
-
-| Bloco | Responsável | Únicos | Título/resumo | EC6 | Dúvidas | QA ≥ 5 |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| IEEE + ACM | Afonso | 170 | 83 (+25 dúvidas) | 39 aceites, 131 rejeitados | 0 | |
-
-Rejeitados do bloco IEEE + ACM por critério: EC1 = 18, EC2 = 9, EC3 = 9, EC4 = 33, EC6 = 62.
+| Duplicados (EC5) | 169 |
+| Estudos únicos | 491 |
+| Excluídos no título/resumo (EC1–EC4) e pelo EC6 | 427 |
+| Chegam à avaliação de qualidade | 64 |
+| Excluídos por Q(e) < 5 | 33 |
+| **Incluídos** | **31** |
 
 ## Critério EC6 (refinamento)
 
 Acrescentado depois da primeira leitura dos resumos: **EC6, o estudo não propõe nem avalia um mecanismo de resposta ou contenção automática.** Muitos estudos só tratavam a deteção e referiam a mitigação de passagem, sem responderem à questão geral (detetar **e** conter).
 
-## Quality Assessment (Parsifal)
-
-Respostas: Sim = 1, Parcialmente = 0,5, Não = 0. Pontuação máxima 8, mínimo para incluir 5.
-
-1. Os objetivos e a contribuição do estudo estão claramente definidos?
-2. O modelo de ML e as features de tráfego estão descritos com detalhe suficiente para se reproduzir? (QF1)
-3. O estudo usa um dataset identificado e público, ou disponibiliza o seu? (QF2)
-4. Reporta métricas além da accuracy (precision, recall, F1, FPR)? (QF2)
-5. O mecanismo de resposta ou contenção é descrito e avaliado, e não só mencionado? (QF3)
-6. A solução é testada em tempo real, num protótipo ou num testbed, e não só offline? (QF4)
-7. Reporta o custo computacional (latência, CPU, memória)? (QF4)
-8. Discute as limitações do trabalho?
+Na revisão final do conjunto, seis estudos que tinham passado a avaliação de qualidade foram excluídos pelo EC6, por
+não proporem qualquer mecanismo de resposta (limitavam-se à classificação, a um alerta ou a uma notificação ao
+utilizador).
