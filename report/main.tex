@@ -1,14 +1,3 @@
-% =====================================================================
-%  SRSI 2026/2027 — Projeto de Grupo, Parte 1 (teórica)
-%  Template IEEE (IEEEtran, conferência, duas colunas) em português
-%  Compilar: pdflatex -> bibtex -> pdflatex -> pdflatex  (ou latexmk -pdf)
-%
-%  Convenções do grupo
-%  - \pendente{...}  = texto por escrever (sai a vermelho no PDF; apagar no fim)
-%  - Cada secção tem um comentário "RESPONSÁVEL:" com a frente que a escreve
-%  - Referências: só em referencias.bib (exportadas do Zotero, estilo IEEE)
-%  - Figuras: pasta figuras/
-% =====================================================================
 \documentclass[conference,a4paper]{IEEEtran}
 
 \usepackage[utf8]{inputenc}
@@ -820,9 +809,11 @@ precisamente, as que mais interessam a esta revisão: só 13 dos 31 estudos desc
 \emph{e} avaliam o mecanismo de resposta (QA5), 19 testam a solução em tempo real ou num
 protótipo (QA6) e 16 reportam o custo computacional (QA7). Na QA6, a resposta ``sim''
 corresponde a testes em \textit{hardware} real, em \textit{testbed} ou em emulação de rede,
-``parcialmente'' a simulações e ``não'' a avaliações só \textit{offline}. Como os
-revisores tinham aplicado esta pergunta de forma diferente aos estudos em emulação, a
-regra foi uniformizada na revisão final. Também a reprodutibilidade
+``parcialmente'' a simulações e ``não'' a avaliações só \textit{offline}. Quando um
+estudo combina vários tipos de avaliação, conta o mais exigente, e um protótipo conta
+como ``sim'', como acontece com o CyberDome, que complementa a simulação com um
+protótipo~\cite{karibandi2025cyberdome}. Como os revisores tinham aplicado esta pergunta
+de forma diferente aos estudos em emulação, a regra foi uniformizada na revisão final. Também a reprodutibilidade
 (QA2) e a discussão das limitações (QA8) ficam quase sempre pela metade. Durante a
 leitura foram ainda encontradas incoerências numéricas internas em vários
 estudos~\cite{elsayed2024mpguard,ibrahim2026purechain,andrade2024ddos,dange2025dual,hussain2026postquantum,premakumari2025qlearning,kumar2025advanced},
@@ -1203,7 +1194,7 @@ F1 de 0,751 no NSL-KDD, contra cerca de 1,0 nos restantes
 \textit{accuracy} passa de 99,97\% no BoT-IoT para 92\% no
 \textit{testbed}~\cite{dange2025dual}.
 
-A eficácia da resposta, central para a questão geral, só tem métrica própria em nove
+A eficácia da resposta, central para a questão geral, só tem métrica própria em dez
 dos 31 estudos: a AME de Toony \textit{et al.}~\cite{toony2024multiblock}, a eficiência de
 resposta de Srilekha \textit{et al.}~\cite{srilekha2025hybrid}, a taxa de mitigação de
 Gowtham \textit{et al.}, de 91,9 a 94,5\%~\cite{gowtham2026fedmp}, e de Premakumari
@@ -1213,7 +1204,8 @@ Agarwal~\cite{shukla2026cyber}, a taxa de sucesso dos ataques de Ibrahim
 que soma o tráfego legítimo que passa e o malicioso que é
 bloqueado~\cite{zolotukhin2021curious}, os cenários mitigados do
 IDERES~\cite{rose2022ideres} e o efeito na entrega de pacotes e na latência do
-RankShield~\cite{hunde2026rankshield}. Kumar e Kumar, por exemplo, propõem uma mitigação mas não
+RankShield~\cite{hunde2026rankshield} e a mitigação de \textit{ransomware} antes da cifra
+de Al Abdulwahid~\cite{Abdulwahid2025}. Kumar e Kumar, por exemplo, propõem uma mitigação mas não
 medem a sua eficácia~\cite{kumar2025advanced}. Foram ainda identificadas incoerências
 internas em alguns estudos, entre o resumo e as
 tabelas~\cite{hussain2026postquantum,premakumari2025qlearning,kumar2025advanced} ou em
@@ -1229,7 +1221,7 @@ raramente é testada fora do \textit{dataset} de treino, e quando o é os result
 A terceira é que os ataques se concentram em \textit{floods}: o DoS/DDoS domina, a
 resposta avaliada é quase sempre contra \textit{floods}, e as \textit{botnets} com C\&C e
 a força bruta têm pouca cobertura. A quarta é que as métricas de resposta são escassas:
-menos de um terço dos estudos mede a eficácia da contenção ou o seu efeito no tráfego
+cerca de um terço dos estudos mede a eficácia da contenção ou o seu efeito no tráfego
 legítimo, e menos de metade dá um valor explícito da taxa de falsos positivos. Por isso a
 solução proposta reporta a FPR e mede as quarentenas indevidas com tráfego só benigno
 (cenário S1, Secção~\ref{sec:proposta}).
@@ -1331,7 +1323,8 @@ quatro estudos~\cite{hussain2026postquantum,kumar2025advanced,Arulkumar2026,Chau
 \textbf{Avaliação em tempo real, protótipos e \textit{testbeds}.} A literatura orientada
 à aplicação prática valida os modelos em cenários simulados ou reais, com graus de
 realismo muito diferentes (Tabela~\ref{tab:qf4}). Sete estudos usam
-simulação~\cite{ibrahim2026purechain,shukla2026cyber,verma2024petrak,premakumari2025qlearning,hunde2026rankshield,karibandi2025cyberdome,Rasheed2026}
+simulação~\cite{ibrahim2026purechain,shukla2026cyber,verma2024petrak,premakumari2025qlearning,hunde2026rankshield,karibandi2025cyberdome,Rasheed2026},
+um deles complementado por um protótipo~\cite{karibandi2025cyberdome},
 e oito emulação de rede, quase sempre com
 Mininet~\cite{ramirezmartinez2025p4,elsayed2024mpguard,zolotukhin2021curious,tawfik2021internet,toony2024multiblock,gowtham2026fedmp,mazhar2022ridps,tariq2025saegru}.
 Tawfik \textit{et al.}, por exemplo, correm o Mininet e o controlador Ryu num Raspberry
@@ -1357,9 +1350,9 @@ estatísticas~\cite{andrade2024ddos}, e no ISAAF a deteção leva cerca de 17\,s
 a 3\,s do bloqueio~\cite{karam2025isaaf}. Nestes casos, o tempo de deteção é entre cerca de
 5 e 160 vezes maior do que o da resposta, o que justifica medir separadamente as duas
 parcelas de $T_c$ (Eq.~\ref{eq:tc}). Os tempos de milissegundos aparecem apenas em
-emulação ou simulação~\cite{toony2024multiblock,shukla2026cyber}, e o XAI-CPS mede a
-mitigação, também em simulação, com uma média de 47,8\,s~\cite{Rasheed2026}; e o estudo de Kponyo
-\textit{et al.} é a exceção em \textit{hardware} real, com deteção em 0,10\,s e mitigação em
+emulação ou simulação~\cite{toony2024multiblock,shukla2026cyber}. O XAI-CPS mede a
+mitigação, também em simulação, com uma média de 47,8\,s~\cite{Rasheed2026}. O estudo de
+Kponyo \textit{et al.} é a exceção em \textit{hardware} real, com deteção em 0,10\,s e mitigação em
 0,22\,s~\cite{kponyo2020lightweight}, mas trata \textit{floods}, que se revelam muito
 depressa.
 
@@ -1510,8 +1503,8 @@ diretamente pela \textit{bridge} do Docker e o movimento lateral, como o varrime
 própria rede por um dispositivo infetado, não passaria pelo \textit{gateway}. O
 \textit{gateway} liga as redes, encaminha o tráfego entre elas e concentra quatro módulos:
 \begin{enumerate}
-  \item \textbf{Captura e extração de fluxos.} O Zeek~\cite{paxson1999bro} observa a
-  interface da rede IoT e escreve um registo por ligação (\texttt{conn.log}), com
+  \item \textbf{Captura e extração de fluxos.} O Zeek~\cite{paxson1999bro} observa as
+  interfaces da rede IoT e escreve um registo por ligação (\texttt{conn.log}), com
   campos como a duração, os bytes e pacotes em cada sentido, o protocolo, o serviço, a
   porta de destino e o estado da ligação.
   \item \textbf{Deteção.} Um serviço em Python lê os registos à medida que são escritos,
@@ -1555,17 +1548,18 @@ com o \texttt{tcprewrite} para corresponderem aos dos contentores. Para o
   \draw[<->] (riot.east) -- (gw.west);
   \draw[<->] (gw.east) -- (srv.west);
 \end{tikzpicture}
-\caption{Arquitetura do sistema proposto, em contentores Docker.}\label{fig:arquitetura}
+\caption{Arquitetura do sistema proposto, em contentores Docker (na rede IoT, cada dispositivo tem uma sub-rede própria).}\label{fig:arquitetura}
 \end{figure}
 
 Há três cuidados de implementação. O primeiro é que o Zeek só escreve uma ligação no
 \texttt{conn.log} quando esta termina ou expira, o que atrasaria a deteção de ligações
 longas, como as de C\&C; por isso as \textit{features} são também calculadas por
-intervalos durante a ligação. O segundo é a ordem das regras: a regra de quarentena
-fica antes da regra que aceita as ligações já estabelecidas, para que estas também
-sejam cortadas. O terceiro é a velocidade de reprodução das capturas, que é mantida
-constante entre cenários, porque altera a duração e os intervalos entre pacotes, que
-são \textit{features} dos modelos.
+intervalos durante a ligação. Estes registos parciais têm uma distribuição diferente da
+dos registos completos usados no treino, e essa diferença é avaliada na Parte~2. O
+segundo é a ordem das regras: a regra de quarentena fica antes da regra que aceita as
+ligações já estabelecidas, para que estas também sejam cortadas. O terceiro é a
+velocidade de reprodução das capturas, que é a original, porque uma velocidade diferente
+altera a duração e os intervalos entre pacotes, que são \textit{features} dos modelos.
 
 A escolha do IoT-23 tem uma vantagem prática importante: as capturas são distribuídas
 com os registos \texttt{conn.log} do Zeek já rotulados. Os modelos são, por isso,
@@ -1613,9 +1607,10 @@ Para evitar resultados otimistas, a divisão entre treino e teste é feita por c
 não por fluxo: os fluxos de uma mesma captura do IoT-23 ficam todos do mesmo lado. Assim
 o modelo nunca é testado com tráfego quase idêntico ao que viu no treino. Os endereços
 IP, os identificadores das ligações e as marcas temporais são excluídos das
-\textit{features}, e a porta de destino é usada com cuidado, porque no IoT-23 a porta 23
-quase basta para identificar o tráfego malicioso e o modelo aprenderia esse atalho em vez
-do comportamento.
+\textit{features}. A porta de destino não é usada diretamente: é agrupada em portas
+conhecidas, registadas e efémeras, porque no IoT-23 a porta 23 quase basta para
+identificar o tráfego malicioso e o modelo aprenderia esse atalho em vez do
+comportamento. Um ensaio de controlo sem a porta mostra se o resultado depende dela.
 
 \subsection{Decisão e contenção}\label{sec:decisao}
 Isolar um dispositivo por causa de um único fluxo suspeito seria arriscado, porque
@@ -2116,7 +2111,7 @@ Quanto aos dados (QF2), os 31 estudos usam 29 \textit{datasets} públicos difere
 recorrem a pelo menos um que não é de IoT, e os dados próprios raramente são publicados.
 O DoS/DDoS aparece em 28 estudos e é quase sempre o ataque contra o qual a resposta é
 demonstrada. A FPR, que indica quantos dispositivos legítimos seriam isolados por engano,
-só tem valor explícito em 13 estudos, e apenas nove medem a eficácia da própria resposta.
+só tem valor explícito em 13 estudos, e apenas dez medem a eficácia da própria resposta.
 
 Quanto à resposta (QF3), o descarte ou o bloqueio de tráfego é a medida mais comum, e 11
 estudos isolam o dispositivo inteiro. A resposta é aplicada sobretudo em controladores
@@ -2126,8 +2121,11 @@ usam modelos de decisão, como a aprendizagem por reforço. Em três, pelo contr
 resposta é proposta mas não chega a ser implementada.
 
 Quanto à avaliação (QF4), seis estudos são avaliados apenas \textit{offline} e só sete
-correm em \textit{hardware} real. Nos três estudos que medem a deteção e a resposta em
-separado, a deteção é a parcela dominante: 17 a 140\,s, contra 0,13 a 4\,s da resposta. O custo computacional é reportado de forma desigual e
+correm em \textit{hardware} real. Nos estudos com ataques lentos ou com recolha periódica de
+estatísticas, a deteção é a parcela dominante: 17 a 140\,s, contra 0,13 a 4\,s da
+resposta~\cite{karam2025isaaf,andrade2024ddos,ramirezmartinez2025p4}. Nos
+\textit{floods}, as duas parcelas ficam abaixo do
+segundo~\cite{toony2024multiblock,kponyo2020lightweight}. O custo computacional é reportado de forma desigual e
 raramente no equipamento onde a deteção corre.
 
 A comparação das Tabelas~\ref{tab:comparacao} e~\ref{tab:comparacao2} mostra a lacuna
