@@ -2,7 +2,7 @@
 
 Projeto de grupo da unidade curricular **Segurança em Redes e Sistemas de Informação (SRSI)**, Mestrado em Engenharia de Telecomunicações e Informática, Iscte – Instituto Universitário de Lisboa, 2026/2027.
 
-Docente: Prof. Valderi Reis Quietinho Leithardt
+Docentes: Prof. Valderi Reis Quietinho Leithardt e Prof. Maurício Machado da Rosa
 
 | Nome | N.º |
 |---|---|
