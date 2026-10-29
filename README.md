@@ -43,7 +43,8 @@ rsl/                                            Dados da revisão sistemática
 | Resultados nas cinco bases | 677 |
 | Importados no Parsifal | 660 |
 | Estudos únicos (após 169 duplicados) | 491 |
-| Aceites na seleção: título, resumo e EC6 (427 excluídos) | 64 |
-| Incluídos após avaliação de qualidade, Q(e) ≥ 5 (33 excluídos) | **31** |
+| Aceites na seleção: título, resumo e EC6 (421 excluídos) | 70 |
+| Com avaliação de qualidade Q(e) ≥ 5 (33 excluídos) | 37 |
+| Incluídos após a revisão final (6 excluídos pelo EC6) | **31** |
 
 A triagem, a avaliação de qualidade e a extração foram feitas na ferramenta [Parsifal](https://parsif.al). Os PDF dos estudos incluídos estão em `rsl/artigos/`.

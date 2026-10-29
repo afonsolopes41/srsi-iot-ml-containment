@@ -81,9 +81,10 @@ Cada base é importada no Parsifal associada ao(s) seu(s) ficheiro(s).
 | Importados no Parsifal ("All") | 660 |
 | Duplicados (EC5) | 169 |
 | Estudos únicos | 491 |
-| Excluídos no título/resumo (EC1–EC4) e pelo EC6 | 427 |
-| Chegam à avaliação de qualidade | 64 |
+| Excluídos no título/resumo (EC1–EC4) e pelo EC6 | 421 |
+| Chegam à avaliação de qualidade | 70 |
 | Excluídos por Q(e) < 5 | 33 |
+| Excluídos na revisão final (EC6) | 6 |
 | **Incluídos** | **31** |
 
 ## Critério EC6 (refinamento)
@@ -92,4 +93,5 @@ Acrescentado depois da primeira leitura dos resumos: **EC6, o estudo não propõ
 
 Na revisão final do conjunto, seis estudos que tinham passado a avaliação de qualidade foram excluídos pelo EC6, por
 não proporem qualquer mecanismo de resposta (limitavam-se à classificação, a um alerta ou a uma notificação ao
-utilizador).
+utilizador). No Parsifal estão marcados como rejeitados pelo EC6, por isso a ferramenta mostra 64 aceites e 427
+rejeitados.

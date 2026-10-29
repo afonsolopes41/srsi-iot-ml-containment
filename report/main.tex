@@ -19,6 +19,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{stfloats}
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{xcolor}
@@ -262,7 +263,7 @@ comprometimento, os coloca automaticamente em quarentena.
   \item uma RSL de 31 estudos publicados entre 2020 e 2026, selecionados a
   partir de 677 resultados em cinco bases de dados, com um critério explícito sobre a
   existência de resposta automática e uma avaliação de qualidade de cada estudo, que
-  mostra que só 14 deles descrevem e avaliam a resposta e só sete medem o tempo que esta
+  mostra que só 13 deles descrevem e avaliam a resposta e só oito medem o tempo que esta
   demora a conter um ataque;
   \item uma comparação dos trabalhos relacionados (Tabelas~\ref{tab:comparacao}
   e~\ref{tab:comparacao2}) centrada
@@ -666,9 +667,10 @@ perguntas de pesquisa (Tabela~\ref{tab:qualidade}), o que garante que os estudos
 incluídos têm informação suficiente para lhes responder. A QA5 é deliberadamente exigente,
 porque muitos artigos anunciam um mecanismo de resposta mas não o implementam nem
 apresentam resultados sobre ele. A Fig.~\ref{fig:selecao} resume o número de estudos em
-cada etapa. Dos 491 estudos únicos, 427 foram excluídos na seleção, pelos critérios
-EC1--EC4 ou pelo EC6. Dos 64 que chegaram à avaliação de qualidade, 33 ficaram abaixo do
-limiar e 31 foram incluídos.
+cada etapa. Dos 491 estudos únicos, 421 foram excluídos na seleção, pelos critérios
+EC1--EC4 ou pelo EC6. Dos 70 que chegaram à avaliação de qualidade, 33 ficaram abaixo do
+limiar. Na revisão final do conjunto, seis dos 37 restantes foram ainda excluídos pelo
+EC6, por não proporem qualquer mecanismo de resposta, e ficaram 31 estudos incluídos.
 
 \begin{table}[H]
 \caption{Perguntas da avaliação de qualidade}\label{tab:qualidade}
@@ -699,14 +701,16 @@ QA8 & Discute as limitações do trabalho? & -- \\
   \node[etapa] (id)  {Identificação: IEEE 139, ACM 34, Scopus 342,\\ScienceDirect 148, MDPI 14 ($n=677$)};
   \node[etapa, below=of id]  (imp) {Importados no Parsifal ($n=660$)};
   \node[etapa, below=of imp] (uni) {Estudos únicos ($n=491$)};
-  \node[etapa, below=of uni] (ec6) {Aceites na seleção: título, resumo e EC6 ($n=64$)};
-  \node[etapa, below=of ec6, fill=gray!12] (inc) {Incluídos após avaliação de qualidade ($n=31$)};
+  \node[etapa, below=of uni] (ec6) {Aceites na seleção: título, resumo e EC6 ($n=70$)};
+  \node[etapa, below=of ec6] (qa) {$Q(e)\ge 5$ ($n=37$)};
+  \node[etapa, below=of qa, fill=gray!12] (inc) {Incluídos ($n=31$)};
   \draw[seta] (id) -- (imp);  \draw[seta] (imp) -- (uni); \draw[seta] (uni) -- (ec6);
-  \draw[seta] (ec6) -- (inc);
+  \draw[seta] (ec6) -- (qa); \draw[seta] (qa) -- (inc);
   \node[saida, right=1.5mm of imp] (x0) {Não exportados ou não importados ($n=17$)};
   \node[saida, right=1.5mm of uni] (x1) {Duplicados, EC5 ($n=169$)};
-  \node[saida, right=1.5mm of ec6] (x3) {Excluídos, EC1--EC4 e EC6 ($n=427$)};
-  \node[saida, right=1.5mm of inc] (x4) {$Q(e)<5$ ($n=33$)};
+  \node[saida, right=1.5mm of ec6] (x3) {Excluídos, EC1--EC4 e EC6 ($n=421$)};
+  \node[saida, right=1.5mm of qa] (x4) {$Q(e)<5$ ($n=33$)};
+  \node[saida, right=1.5mm of inc] (x5) {Revisão final, EC6 ($n=6$)};
 \end{tikzpicture}
 \caption{Processo de seleção dos estudos.}\label{fig:selecao}
 \end{figure}
@@ -812,9 +816,13 @@ A Tabela~\ref{tab:qa_resultados} mostra as respostas de cada estudo às oito per
 qualidade, e a última linha conta quantos estudos respondem ``sim'' a cada uma. As
 pontuações vão de 5,0 a 7,5. Os objetivos estão claros em todos os estudos (QA1) e quase
 todos reportam métricas além da \textit{accuracy} (QA4). As perguntas mais fracas são,
-precisamente, as que mais interessam a esta revisão: só 14 dos 31 estudos descrevem
-\emph{e} avaliam o mecanismo de resposta (QA5), 17 testam a solução em tempo real ou num
-protótipo (QA6) e 16 reportam o custo computacional (QA7). Também a reprodutibilidade
+precisamente, as que mais interessam a esta revisão: só 13 dos 31 estudos descrevem
+\emph{e} avaliam o mecanismo de resposta (QA5), 19 testam a solução em tempo real ou num
+protótipo (QA6) e 16 reportam o custo computacional (QA7). Na QA6, a resposta ``sim''
+corresponde a testes em \textit{hardware} real, em \textit{testbed} ou em emulação de rede,
+``parcialmente'' a simulações e ``não'' a avaliações só \textit{offline}. Como os
+revisores tinham aplicado esta pergunta de forma diferente aos estudos em emulação, a
+regra foi uniformizada na revisão final. Também a reprodutibilidade
 (QA2) e a discussão das limitações (QA8) ficam quase sempre pela metade. Durante a
 leitura foram ainda encontradas incoerências numéricas internas em vários
 estudos~\cite{elsayed2024mpguard,ibrahim2026purechain,andrade2024ddos,dange2025dual,hussain2026postquantum,premakumari2025qlearning,kumar2025advanced},
@@ -830,11 +838,9 @@ autores os publicaram, mas comparados com cautela.
 \toprule
 Estudo & QA1 & QA2 & QA3 & QA4 & QA5 & QA6 & QA7 & QA8 & $Q(e)$ \\
 \midrule
-Al Abdulwahid~\cite{Abdulwahid2025} & S & S & S & S & S & S & P & S & 7,5 \\
 Karam~\cite{karam2025isaaf} & S & S & S & S & S & S & S & P & 7,5 \\
 Toony~\cite{toony2024multiblock} & S & P & S & S & S & S & S & S & 7,5 \\
-Arulkumar~\cite{Arulkumar2026}      & S & S & S & S & P & S & S & P & 7,0 \\
-Hussain~\cite{hussain2026postquantum} & S & S & S & S & P & P & S & S & 7,0 \\
+Al Abdulwahid~\cite{Abdulwahid2025} & S & S & S & S & P & S & P & S & 7,0 \\
 Iqbal~\cite{Iqbal2026}              & S & P & S & S & P & S & S & S & 7,0 \\
 Kponyo~\cite{kponyo2020lightweight}   & S & S & S & N & S & S & S & S & 7,0 \\
 Ramirez-Martinez~\cite{ramirezmartinez2025p4} & S & P & S & S & S & S & S & P & 7,0 \\
@@ -842,27 +848,29 @@ Shukla~\cite{shukla2026cyber} & S & S & S & S & P & P & S & S & 7,0 \\
 Srilekha~\cite{srilekha2025hybrid} & S & P & S & S & S & S & S & P & 7,0 \\
 Andrade~\cite{andrade2024ddos}        & S & P & S & S & S & S & S & N & 6,5 \\
 Gowtham~\cite{gowtham2026fedmp} & S & P & P & S & S & S & S & P & 6,5 \\
+Hussain~\cite{hussain2026postquantum} & S & S & S & S & P & N & S & S & 6,5 \\
 Mazhar~\cite{mazhar2022ridps} & S & P & P & S & S & S & S & P & 6,5 \\
+Rasheed~\cite{Rasheed2026}          & S & P & S & S & P & P & S & S & 6,5 \\
 Ravi~\cite{ravi2020semisupervised}    & S & P & P & S & S & S & S & P & 6,5 \\
 Rose~\cite{rose2022ideres}            & S & P & S & S & S & S & P & P & 6,5 \\
-Chaudhary~\cite{Chaudhary2025}      & S & S & S & S & P & P & P & P & 6,0 \\
+Arulkumar~\cite{Arulkumar2026}      & S & S & S & S & P & N & S & P & 6,0 \\
+El-Sayed~\cite{elsayed2024mpguard}    & S & P & S & S & P & S & P & P & 6,0 \\
 Garba~\cite{garba2024sdn} & S & P & S & S & P & S & P & P & 6,0 \\
 Ibrahim~\cite{ibrahim2026purechain}   & S & P & S & S & P & P & S & P & 6,0 \\
-Premakumari~\cite{premakumari2025qlearning} & S & P & P & P & S & S & S & P & 6,0 \\
-Rasheed~\cite{Rasheed2026}          & S & P & S & S & P & N & S & S & 6,0 \\
 Saurabh~\cite{saurabh2022mlaps}       & S & S & S & S & P & N & P & S & 6,0 \\
+Tariq~\cite{tariq2025saegru} & S & P & S & S & P & S & P & P & 6,0 \\
 Tawfik~\cite{tawfik2021internet}      & S & P & S & S & P & S & N & S & 6,0 \\
 Verma~\cite{verma2024petrak} & S & S & S & S & P & P & P & P & 6,0 \\
-El-Sayed~\cite{elsayed2024mpguard}    & S & P & S & S & P & P & P & P & 5,5 \\
+Chaudhary~\cite{Chaudhary2025}      & S & S & S & S & P & N & P & P & 5,5 \\
+Dange~\cite{dange2025dual}            & S & P & S & S & N & S & P & P & 5,5 \\
 Hunde~\cite{hunde2026rankshield}      & S & P & P & S & S & P & P & P & 5,5 \\
-Tariq~\cite{tariq2025saegru} & S & P & S & S & P & P & P & P & 5,5 \\
-Dange~\cite{dange2025dual}            & S & P & S & S & N & P & P & P & 5,0 \\
+Premakumari~\cite{premakumari2025qlearning} & S & P & P & P & S & P & S & P & 5,5 \\
+Zolotukhin~\cite{zolotukhin2021curious} & S & P & S & P & S & S & N & P & 5,5 \\
 Karibandi~\cite{karibandi2025cyberdome} & S & P & N & S & P & S & P & P & 5,0 \\
 Kumar e Kumar~\cite{kumar2025advanced} & S & P & S & S & P & N & P & P & 5,0 \\
 Rawat~\cite{rawat2024intelligent}     & S & S & S & S & N & N & N & S & 5,0 \\
-Zolotukhin~\cite{zolotukhin2021curious} & S & P & S & P & S & P & N & P & 5,0 \\
 \midrule
-N.º de ``S'' (31) & 31 & 10 & 25 & 28 & 14 & 17 & 16 & 10 & \\
+N.º de ``S'' (31) & 31 & 10 & 25 & 28 & 13 & 19 & 16 & 10 & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -932,9 +940,9 @@ análise do efeito de cada um na contenção. Essa comparação é um dos
 objetivos da solução proposta na Secção~\ref{sec:proposta}.
 
 As aplicações destes modelos distinguem-se pelos recursos de \textit{hardware} e pela
-complexidade do tráfego analisado. Os modelos leves, como o \textit{Isolation Forest} ou
-heurísticas com aprendizagem automática simples, são os que cabem nos próprios
-dispositivos ou em \textit{gateways} de baixo custo. É o caso do mecanismo de Kponyo
+complexidade do tráfego analisado. Os modelos leves, como o KNN ou as árvores de
+decisão, são os que cabem nos próprios dispositivos ou em \textit{gateways} de baixo
+custo. É o caso do mecanismo de Kponyo
 \textit{et al.}~\cite{kponyo2020lightweight}, que deteta \textit{floods} SYN, ICMP e UDP
 diretamente em dispositivos IoT com poucos recursos. O modelo, um KNN treinado fora do
 dispositivo, classifica o efeito de um afluxo de pacotes na CPU e na memória e ocupa em
@@ -943,9 +951,11 @@ exigem mais capacidade de treino e aparecem sobretudo em arquiteturas centraliza
 controladores SDN ou em servidores na \textit{cloud}, onde analisam os dados agregados de
 vários
 dispositivos~\cite{zolotukhin2021curious,tawfik2021internet,rose2022ideres}.
-Esta complementaridade entre modelos leves para a reação imediata e modelos profundos para
-a análise centralizada é uma das razões para a solução proposta comparar o
-\textit{Isolation Forest} e o \textit{autoencoder} no mesmo \textit{gateway}.
+Nenhum dos 31 estudos usa o \textit{Isolation Forest}, apesar de ser leve e de não
+precisar de rótulos. Essa ausência, junto com a complementaridade entre modelos leves para
+a reação imediata e modelos profundos para a análise centralizada, é uma das razões para
+a solução proposta comparar o \textit{Isolation Forest} e o \textit{autoencoder} no
+mesmo \textit{gateway}.
 
 % Síntese da QF1 (Rafael Silva).
 Em síntese, a aprendizagem supervisionada é a mais comum entre os estudos analisados;
@@ -1127,11 +1137,11 @@ Verma~\cite{verma2024petrak} & Simulação e \textit{offline} & NS-3; Weka num i
 Premakumari~\cite{premakumari2025qlearning} & Simulação & MATLAB Simulink, 50 nós & Latência 120\,ms; energia 45--74\,J \\
 Karibandi~\cite{karibandi2025cyberdome} & Simulação e protótipo & \textit{Cloud}, \textit{gateways} e SDN & Inferência 8,74\,µs por amostra; treino 39,6\,s \\
 Hunde~\cite{hunde2026rankshield} & Simulação & Cooja (Zolertia Z1), 19--100 nós & Treino 218--2750\,ms \\
+Rasheed~\cite{Rasheed2026} & \textit{Offline} e simulação & GPU A100 & Latência 15,6\,ms; 2,4\,GB de RAM; mitigação média em 47,8\,s (simulação) \\
 Saurabh~\cite{saurabh2022mlaps} & \textit{Offline} & UNSW-NB15 & Tempo por modelo (DT 4\,ms; RF 46\,ms) \\
 Rawat~\cite{rawat2024intelligent} & \textit{Offline} & IoT-23 & Não reportado \\
 Hussain~\cite{hussain2026postquantum} & \textit{Offline} & Google Colab & \textit{Handshake} pós-quântico 3,1--4,4\,s \\
 Kumar e Kumar~\cite{kumar2025advanced} & \textit{Offline} & PC i3, 8\,GB & Treino 250\,s; teste 15\,s \\
-Rasheed~\cite{Rasheed2026} & \textit{Offline} & GPU A100 & Latência 15,6\,ms; 2,4\,GB de RAM \\
 Arulkumar~\cite{Arulkumar2026} & \textit{Offline} & i7, 16\,GB, RTX & Latência 200\,ms \\
 Chaudhary~\cite{Chaudhary2025} & \textit{Offline} & i5 e Azure & 115--170\,s por modelo \\
 \bottomrule
@@ -1269,14 +1279,42 @@ confirmação do alerta por pelo menos dois nós~\cite{srilekha2025hybrid} ou li
 dinâmicos~\cite{hunde2026rankshield}. Seis recorrem a modelos de decisão, sobretudo
 aprendizagem por
 reforço~\cite{rose2022ideres,zolotukhin2021curious,gowtham2026fedmp,premakumari2025qlearning,kumar2025advanced,Arulkumar2026}.
-Em quatro estudos, pelo contrário, a resposta é proposta mas não chega a ser
-implementada, ou fica-se pelo plano
-conceptual~\cite{rawat2024intelligent,hussain2026postquantum,kumar2025advanced,shukla2026cyber}.
+Em três estudos, pelo contrário, a resposta é proposta mas não chega a ser
+implementada~\cite{rawat2024intelligent,hussain2026postquantum,kumar2025advanced}.
 
 Em suma, e respondendo à QF3, os mecanismos de resposta automática identificados na literatura consistem principalmente no descarte e bloqueio de tráfego, na aplicação de regras de \textit{firewall}, no isolamento de nós ou dispositivos e na reconfiguração de políticas através de SDN. As ações são aplicadas em diferentes níveis, desde o próprio dispositivo IoT até aos \textit{gateways} e equipamentos programáveis, podendo a decisão ser realizada localmente ou em componentes centralizados, incluindo a \textit{cloud}. O desencadeamento depende de classificações produzidas por modelos de ML, de mecanismos adicionais de validação ou de modelos de decisão adaptativa. Apesar da diversidade de soluções, a revisão evidencia que a eficácia da contenção continua a ser avaliada de forma menos consistente do que a deteção, reforçando a importância de desenvolver e testar sistemas que integrem ambas as etapas.
 
 \subsection{Avaliação das soluções (QF4)}\label{sec:qf4}
 % RESPONSÁVEL: Frente 4 (Rafael Reis)
+\begin{table*}[!b]
+\caption{Comparação dos trabalhos relacionados (S: supervisionado; NS: não supervisionado; SS: semi-supervisionado; R: por reforço)}\label{tab:comparacao}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{0.97}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.14\textwidth}c>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.115\textwidth}c@{}}
+\toprule
+Referência & \textit{Dataset}(s) & Modelo(s) & Apr. & Onde atua a resposta & Resposta automática & Avaliação & Contenção medida & QA \\
+\midrule
+Noetzold \textit{et al.}~\cite{noetzold2026anomaly} (2026) & CICIDS2017, CVE, DNS e texto (Kaggle) & BiLSTM, FFNN, CNN, RNN-CNN & S & -- & Só alertas, numa interface em tempo real & \textit{Offline}; inferência em servidor, Raspberry Pi 4 e ESP32-S3 & \nao & -- \\
+\midrule
+Kponyo \textit{et al.}~\cite{kponyo2020lightweight} (2020) & Próprio (CPU e memória) & KNN sobre CPU e memória & S & Dispositivo (\textit{host}) & Descarte por protocolo e porta (NetfilterQueue) & Tempo real (4 Raspberry Pi 3B) & Mitigação em 0,22\,s & 7,0 \\
+Ravi e Shalinie~\cite{ravi2020semisupervised} (2020) & NSL-KDD, próprio & DFNN + K-means (SDRK) & SS & Nó \textit{fog} (\textit{switch}) & ACL de descarte do par MAC--IP com temporizador & \textit{Testbed} real (30 Raspberry Pi) & Resposta $\ge$34\% mais rápida que na \textit{cloud} & 6,5 \\
+Tawfik \textit{et al.}~\cite{tawfik2021internet} (2021) & IoTID20, próprio & RF, CNN, LSTM & S & Controlador SDN (Ryu) & Descarte ou bloqueio da porta ou do \textit{host} (descrito) & Emulação (Mininet) e \textit{offline} & \nao & 6,0 \\
+Zolotukhin \textit{et al.}~\cite{zolotukhin2021curious} (2021) & CICIDS2018 & PPO + MLP, CNN, LSTM, AE, SOM, BiGAN & S, NS, R & Controlador SDN & Descarte e redirecionamento de fluxos & Emulação & Curvas de recompensa & 5,5 \\
+Mazhar \textit{et al.}~\cite{mazhar2022ridps} (2022) & Próprio & SVM + assinaturas & S & Controlador SDN (ONOS) & Regras OpenFlow de descarte & Emulação (Mininet-WiFi) & \nao{} (atraso do tráfego legítimo: 8\,s) & 6,5 \\
+Rose \textit{et al.}~\cite{rose2022ideres} (2022) & Próprio (público) & CNN + grafos de ataque (POMDP) & S & \textit{Gateway} e \textit{cloud} & Regras iptables: ligação específica ou isolamento do \textit{host} & \textit{Testbed} virtualizado & Cenários mitigados (sem tempo) & 6,5 \\
+Saurabh \textit{et al.}~\cite{saurabh2022mlaps} (2022) & UNSW-NB15 & DT + RF (2 níveis) & S & Não especificado & Descarte de pacotes, aplicado ao \textit{dataset} & \textit{Offline} & \nao & 6,0 \\
+Andrade \textit{et al.}~\cite{andrade2024ddos} (2024) & CICDDoS2019 & LR + NB & S & \textit{Switch} P4 (ONOS) & IP do equipamento em tabela de descarte após 5 previsões & \textit{Testbed} 5G & Mitigação em 2--4\,s & 6,5 \\
+El-Sayed \textit{et al.}~\cite{elsayed2024mpguard} (2024) & ToN-IoT, Edge-IIoTset, CICIoT2023 & \textit{Stacking} (RF, SVM, DT, kNN, \dots{} + MLP) & S & \textit{Switches} P4 e controladores SDN & Descarte e limitação de débito & Emulação (Mininet-WiFi) & \nao{} (só deteção: 11--33\,ms) & 6,0 \\
+Garba \textit{et al.}~\cite{garba2024sdn} (2024) & UNSW-NB15, CICDDoS2019, próprio & DT, KNN, LR, SVM & S & Controlador SDN (Ryu) & Descarte do MAC atacante (desencadeado pelo Snort) & \textit{Hardware} real (Raspberry Pi) & \nao & 6,0 \\
+Rawat \textit{et al.}~\cite{rawat2024intelligent} (2024) & IoT-23 & KNN, LR, LSTM & S & Não especificado & Contramedida proposta, não implementada & \textit{Offline} & \nao & 5,0 \\
+Toony \textit{et al.}~\cite{toony2024multiblock} (2024) & Edge-IIoTset, ToN-IoT, X-IIoTID & \textit{Ensemble} ponderado de 6 classificadores (EWEA) & S & \textit{Switches} P4 e controladores SDN & Descarte da origem, isolamento do nó e alerta aos outros controladores & Emulação (Mininet-WiFi) & Mitigação em $\approx$3\,ms & 7,5 \\
+Verma \textit{et al.}~\cite{verma2024petrak} (2024) & KDDCUP'99, ToN-IoT, \dots, próprio & BayesNet, regressão logística & S & RSU (\textit{edge} veicular) & Desvio (\textit{sinkhole}) e descarte por assinatura & Simulação (NS-3) e \textit{offline} & \nao & 6,0 \\
+Al Abdulwahid~\cite{Abdulwahid2025} (2025) & CICIDS2017, CSE-CIC-IDS2018, UNSW-NB15 & AE + RNN (CyberGuard-X) & SS & \textit{Gateway} ou \textit{edge} & Mitigação antes da cifra do \textit{ransomware} (62\%); mecanismo não descrito & Tempo real (i9, RTX 3090) & Latência 12,8\,ms & 7,0 \\
+Chaudhary \textit{et al.}~\cite{Chaudhary2025} (2025) & BoT-IoT & SVM, RF, J48, KNN, XGBoost & S & \textit{Fog} com SDN & Bloqueio & \textit{Offline} & \nao & 5,5 \\
+\bottomrule
+\end{tabular}
+\end{table*}
 A literatura mostra uma evolução clara: muitos trabalhos começam com validações em
 ambiente controlado, \textit{offline} e com \textit{datasets} de referência, e evoluem
 para implementações em protótipos, \textit{testbeds} e redes em tempo real. As abordagens
@@ -1284,16 +1322,16 @@ de avaliação dividem-se, assim, em duas categorias.
 
 \textbf{Avaliação estática ou \textit{offline}.} É a etapa em que se calculam as
 métricas (exatidão, taxa de falsos positivos, matrizes de confusão) e se ajustam os
-parâmetros dos modelos, e em sete dos 31 estudos é a única. O MLAPS é avaliado apenas sobre o
+parâmetros dos modelos, e em seis dos 31 estudos é a única. O MLAPS é avaliado apenas sobre o
 UNSW-NB15~\cite{saurabh2022mlaps}; Rawat \textit{et al.} classificam fluxos do IoT-23 e,
 embora o resumo refira simulações e implementações reais, os resultados apresentados são
 apenas de classificação~\cite{rawat2024intelligent}. O mesmo acontece em mais
-cinco estudos~\cite{hussain2026postquantum,kumar2025advanced,Rasheed2026,Arulkumar2026,Chaudhary2025}.
+quatro estudos~\cite{hussain2026postquantum,kumar2025advanced,Arulkumar2026,Chaudhary2025}.
 
 \textbf{Avaliação em tempo real, protótipos e \textit{testbeds}.} A literatura orientada
 à aplicação prática valida os modelos em cenários simulados ou reais, com graus de
-realismo muito diferentes (Tabela~\ref{tab:qf4}). Seis estudos usam
-simulação~\cite{ibrahim2026purechain,shukla2026cyber,verma2024petrak,premakumari2025qlearning,hunde2026rankshield,karibandi2025cyberdome}
+realismo muito diferentes (Tabela~\ref{tab:qf4}). Sete estudos usam
+simulação~\cite{ibrahim2026purechain,shukla2026cyber,verma2024petrak,premakumari2025qlearning,hunde2026rankshield,karibandi2025cyberdome,Rasheed2026}
 e oito emulação de rede, quase sempre com
 Mininet~\cite{ramirezmartinez2025p4,elsayed2024mpguard,zolotukhin2021curious,tawfik2021internet,toony2024multiblock,gowtham2026fedmp,mazhar2022ridps,tariq2025saegru}.
 Tawfik \textit{et al.}, por exemplo, correm o Mininet e o controlador Ryu num Raspberry
@@ -1316,10 +1354,11 @@ média 20,6\,s, porque um ataque lento só se revela ao fim de algum
 tempo~\cite{ramirezmartinez2025p4}. Na rede 5G, a mitigação demora 2 a 4\,s e a deteção
 entre 20 e 140\,s, conforme o intervalo de recolha das
 estatísticas~\cite{andrade2024ddos}, e no ISAAF a deteção leva cerca de 17\,s, contra 1
-a 3\,s do bloqueio~\cite{karam2025isaaf}. Nestes casos, o tempo de deteção é uma a duas
-ordens de grandeza maior do que o da resposta, o que justifica medir separadamente as duas
+a 3\,s do bloqueio~\cite{karam2025isaaf}. Nestes casos, o tempo de deteção é entre cerca de
+5 e 160 vezes maior do que o da resposta, o que justifica medir separadamente as duas
 parcelas de $T_c$ (Eq.~\ref{eq:tc}). Os tempos de milissegundos aparecem apenas em
-emulação ou simulação~\cite{toony2024multiblock,shukla2026cyber}, e o estudo de Kponyo
+emulação ou simulação~\cite{toony2024multiblock,shukla2026cyber}, e o XAI-CPS mede a
+mitigação, também em simulação, com uma média de 47,8\,s~\cite{Rasheed2026}; e o estudo de Kponyo
 \textit{et al.} é a exceção em \textit{hardware} real, com deteção em 0,10\,s e mitigação em
 0,22\,s~\cite{kponyo2020lightweight}, mas trata \textit{floods}, que se revelam muito
 depressa.
@@ -1347,35 +1386,6 @@ porém, só foi feita em sete dos 31 estudos, e quase sempre com um único tipo 
 a memória do \textit{gateway} nos mesmos cenários para os três modelos.
 
 
-\begin{table*}[p]
-\caption{Comparação dos trabalhos relacionados (S: supervisionado; NS: não supervisionado; SS: semi-supervisionado; R: por reforço)}\label{tab:comparacao}
-\centering\scriptsize
-\setlength{\tabcolsep}{2.5pt}
-\renewcommand{\arraystretch}{0.97}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.14\textwidth}c>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.115\textwidth}c@{}}
-\toprule
-Referência & \textit{Dataset}(s) & Modelo(s) & Apr. & Onde atua a resposta & Resposta automática & Avaliação & Contenção medida & QA \\
-\midrule
-Noetzold \textit{et al.}~\cite{noetzold2026anomaly} (2026) & CICIDS2017, CVE, DNS e texto (Kaggle) & BiLSTM, FFNN, CNN, RNN-CNN & S & -- & Só alertas, numa interface em tempo real & \textit{Offline}; inferência em servidor, Raspberry Pi 4 e ESP32-S3 & \nao & -- \\
-\midrule
-Kponyo \textit{et al.}~\cite{kponyo2020lightweight} (2020) & Próprio (CPU e memória) & KNN sobre CPU e memória & S & Dispositivo (\textit{host}) & Descarte por protocolo e porta (NetfilterQueue) & Tempo real (4 Raspberry Pi 3B) & Mitigação em 0,22\,s & 7,0 \\
-Ravi e Shalinie~\cite{ravi2020semisupervised} (2020) & NSL-KDD, próprio & DFNN + K-means (SDRK) & SS & Nó \textit{fog} (\textit{switch}) & ACL de descarte do par MAC--IP com temporizador & \textit{Testbed} real (30 Raspberry Pi) & Resposta $\ge$34\% mais rápida que na \textit{cloud} & 6,5 \\
-Tawfik \textit{et al.}~\cite{tawfik2021internet} (2021) & IoTID20, próprio & RF, CNN, LSTM & S & Controlador SDN (Ryu) & Descarte ou bloqueio da porta ou do \textit{host} (descrito) & Emulação (Mininet) e \textit{offline} & \nao & 6,0 \\
-Zolotukhin \textit{et al.}~\cite{zolotukhin2021curious} (2021) & CICIDS2018 & PPO + MLP, CNN, LSTM, AE, SOM, BiGAN & S, NS, R & Controlador SDN & Descarte e redirecionamento de fluxos & Emulação & Curvas de recompensa & 5,0 \\
-Mazhar \textit{et al.}~\cite{mazhar2022ridps} (2022) & Próprio & SVM + assinaturas & S & Controlador SDN (ONOS) & Regras OpenFlow de descarte & Emulação (Mininet-WiFi) & \nao{} (atraso do tráfego legítimo: 8\,s) & 6,5 \\
-Rose \textit{et al.}~\cite{rose2022ideres} (2022) & Próprio (público) & CNN + grafos de ataque (POMDP) & S & \textit{Gateway} e \textit{cloud} & Regras iptables: ligação específica ou isolamento do \textit{host} & \textit{Testbed} virtualizado & Cenários mitigados (sem tempo) & 6,5 \\
-Saurabh \textit{et al.}~\cite{saurabh2022mlaps} (2022) & UNSW-NB15 & DT + RF (2 níveis) & S & Não especificado & Descarte de pacotes, aplicado ao \textit{dataset} & \textit{Offline} & \nao & 6,0 \\
-Andrade \textit{et al.}~\cite{andrade2024ddos} (2024) & CICDDoS2019 & LR + NB & S & \textit{Switch} P4 (ONOS) & IP do equipamento em tabela de descarte após 5 previsões & \textit{Testbed} 5G & Mitigação em 2--4\,s & 6,5 \\
-El-Sayed \textit{et al.}~\cite{elsayed2024mpguard} (2024) & ToN-IoT, Edge-IIoTset, CICIoT2023 & \textit{Stacking} (RF, SVM, DT, kNN, \dots{} + MLP) & S & \textit{Switches} P4 e controladores SDN & Descarte e limitação de débito & Emulação (Mininet-WiFi) & \nao{} (só deteção: 11--33\,ms) & 5,5 \\
-Garba \textit{et al.}~\cite{garba2024sdn} (2024) & UNSW-NB15, CICDDoS2019, próprio & DT, KNN, LR, SVM & S & Controlador SDN (Ryu) & Descarte do MAC atacante (desencadeado pelo Snort) & \textit{Hardware} real (Raspberry Pi) & \nao & 6,0 \\
-Rawat \textit{et al.}~\cite{rawat2024intelligent} (2024) & IoT-23 & KNN, LR, LSTM & S & Não especificado & Contramedida proposta, não implementada & \textit{Offline} & \nao & 5,0 \\
-Toony \textit{et al.}~\cite{toony2024multiblock} (2024) & Edge-IIoTset, ToN-IoT, X-IIoTID & \textit{Ensemble} ponderado de 6 classificadores (EWEA) & S & \textit{Switches} P4 e controladores SDN & Descarte da origem, isolamento do nó e alerta aos outros controladores & Emulação (Mininet-WiFi) & Mitigação em $\approx$3\,ms & 7,5 \\
-Verma \textit{et al.}~\cite{verma2024petrak} (2024) & KDDCUP'99, ToN-IoT, \dots, próprio & BayesNet, regressão logística & S & RSU (\textit{edge} veicular) & Desvio (\textit{sinkhole}) e descarte por assinatura & Simulação (NS-3) e \textit{offline} & \nao & 6,0 \\
-Al Abdulwahid~\cite{Abdulwahid2025} (2025) & CICIDS2017, CSE-CIC-IDS2018, UNSW-NB15 & AE + RNN (CyberGuard-X) & SS & \textit{Gateway} ou \textit{edge} & Automática (tipo não indicado na extração) & Tempo real (i9, RTX 3090) & Latência 12,8\,ms & 7,5 \\
-Chaudhary \textit{et al.}~\cite{Chaudhary2025} (2025) & BoT-IoT & SVM, RF, J48, KNN, XGBoost & S & \textit{Fog} com SDN & Bloqueio & \textit{Offline} & \nao & 6,0 \\
-\bottomrule
-\end{tabular}
-\end{table*}
 
 \begin{table*}[p]
 \caption{Comparação dos trabalhos relacionados (continuação)}\label{tab:comparacao2}
@@ -1386,22 +1396,22 @@ Chaudhary \textit{et al.}~\cite{Chaudhary2025} (2025) & BoT-IoT & SVM, RF, J48, 
 \toprule
 Referência & \textit{Dataset}(s) & Modelo(s) & Apr. & Onde atua a resposta & Resposta automática & Avaliação & Contenção medida & QA \\
 \midrule
-Dange e Nitnaware~\cite{dange2025dual} (2025) & BoT-IoT, CTU-13, próprio & LR, SVM, NB + regras & S & \textit{Gateway} (Raspberry Pi) & Isolamento do dispositivo (não descrito) & \textit{Testbed} real & \nao & 5,0 \\
+Dange e Nitnaware~\cite{dange2025dual} (2025) & BoT-IoT, CTU-13, próprio & LR, SVM, NB + regras & S & \textit{Gateway} (Raspberry Pi) & Isolamento do dispositivo (não descrito) & \textit{Testbed} real & \nao & 5,5 \\
 Karam \textit{et al.}~\cite{karam2025isaaf} (2025) & MQTTset, próprio (público) & DT, GRU (escolhidos entre 15 modelos) & S & \textit{Gateway} (Raspberry Pi 4) & Bloqueio do IP e da porta 1883 na \textit{firewall} do \textit{broker}, via REST & \textit{Hardware} real e \textit{offline} & Mitigação em 1--3\,s (deteção $\approx$17\,s) & 7,5 \\
 Karibandi \textit{et al.}~\cite{karibandi2025cyberdome} (2025) & Não identificado (11 classes) & XGBoost & S & \textit{Cloud} e controlador SDN & Controlo de fluxos, segmentação e quarentena, por níveis & Simulação e protótipo & \nao & 5,0 \\
 Kumar e Kumar~\cite{kumar2025advanced} (2025) & CICIoT2023 & DCSAtten-EBiGRU + Double DQN & S, R & \textit{Gateway} & Bloquear, permitir ou limitar (sem resultados) & \textit{Offline} & \nao & 5,0 \\
-Premakumari \textit{et al.}~\cite{premakumari2025qlearning} (2025) & AWID, IoT-23, simulado & FNN + Q-learning e Double Q-learning & S, R & Dispositivo (nós sensores) & Ajuste do nível de encriptação (sem bloqueio) & Simulação (MATLAB) & Latência 120\,ms & 6,0 \\
+Premakumari \textit{et al.}~\cite{premakumari2025qlearning} (2025) & AWID, IoT-23, simulado & FNN + Q-learning e Double Q-learning & S, R & Dispositivo (nós sensores) & Ajuste do nível de encriptação (sem bloqueio) & Simulação (MATLAB) & Latência 120\,ms & 5,5 \\
 Ramirez-Martinez \textit{et al.}~\cite{ramirezmartinez2025p4} (2025) & CICIoT2023, IoT-23, próprio & KNN, DT, RF, LSTM, CNN, GRU, MLP & S & \textit{Switch} P4 & Descarte do IP de origem após 3 fluxos maliciosos & Emulação (Mininet, BMv2) & Mitigação em 0,128\,s & 7,0 \\
 Srilekha \textit{et al.}~\cite{srilekha2025hybrid} (2025) & UNSW-NB15, sintético & Extra Trees (\textit{edge}), CNN-LSTM (\textit{cloud}) & S & \textit{Edge} e \textit{cloud}, com \textit{blockchain} & Bloqueio, limitação de débito e quarentena por \textit{smart contract} & \textit{Hardware} real (Raspberry Pi 4) e simulação & Resposta $<$3\,s & 7,0 \\
-Tariq e Ahanger~\cite{tariq2025saegru} (2025) & IoT-23, MedBIoT, próprio & SAE + GRU & S, NS & \textit{Gateway} ou \textit{edge} & Isolamento, bloqueio de IP e regras de \textit{firewall} por nível de risco & Emulação e \textit{offline} & \nao & 5,5 \\
-Arulkumar e K~\cite{Arulkumar2026} (2026) & DAPT2020, KDDCUP'99, CICIoT2023, \dots & CNN-LSTM-BNN + XGBoost/LR; MDP multiagente & S, R & \textit{Gateway} ou \textit{edge} & Bloqueio e outras ações & \textit{Offline} & \nao{} (latência 200\,ms) & 7,0 \\
+Tariq e Ahanger~\cite{tariq2025saegru} (2025) & IoT-23, MedBIoT, próprio & SAE + GRU & S, NS & \textit{Gateway} ou \textit{edge} & Isolamento, bloqueio de IP e regras de \textit{firewall} por nível de risco & Emulação e \textit{offline} & \nao & 6,0 \\
+Arulkumar e K~\cite{Arulkumar2026} (2026) & DAPT2020, KDDCUP'99, CICIoT2023, \dots & CNN-LSTM-BNN + XGBoost/LR; MDP multiagente & S, R & \textit{Gateway} ou \textit{edge} & Bloqueio e outras ações & \textit{Offline} & \nao{} (latência 200\,ms) & 6,0 \\
 Gowtham \textit{et al.}~\cite{gowtham2026fedmp} (2026) & Edge-IIoTset, CIC-IDS2017, próprio & KPCA-TCN, Ghost-SE federado; Q-learning & S, R & Nós \textit{fog} e controlador SDN & Etiquetar, limitar, descartar ou reencaminhar fluxos & \textit{Testbed} Mininet SDN-\textit{fog} & Latência de controlo 42--51\,ms & 6,5 \\
 Hunde e Ismail~\cite{hunde2026rankshield} (2026) & Próprio (Cooja) & DNN + limiares dinâmicos & S & Dispositivos (nós RPL) & \textit{Blacklist} do nó atacante, propagada pela rede & Simulação (Cooja) & \nao{} (PDR +67\%, latência $-$66\%) & 5,5 \\
-Hussain \textit{et al.}~\cite{hussain2026postquantum} (2026) & NSL-KDD, MedBIoT, CIC-IDS2017, \dots & RF, LR, MLP (\textit{trust score}) & S & \textit{Gateway} e motor de política & \textit{Allow}, \textit{monitor}, \textit{deny} ou quarentena (não implementadas) & \textit{Offline} (Colab) & \nao & 7,0 \\
+Hussain \textit{et al.}~\cite{hussain2026postquantum} (2026) & NSL-KDD, MedBIoT, CIC-IDS2017, \dots & RF, LR, MLP (\textit{trust score}) & S & \textit{Gateway} e motor de política & \textit{Allow}, \textit{monitor}, \textit{deny} ou quarentena (não implementadas) & \textit{Offline} (Colab) & \nao & 6,5 \\
 Ibrahim \textit{et al.}~\cite{ibrahim2026purechain} (2026) & IoTForge Pro, WUSTL-IIoT, X-IIoTID & CNN-BiLSTM & S & \textit{Gateway} (não especificado) & Quarentena de 120\,s ou limitação de débito & Simulação (\textit{replay}) & Taxa de sucesso dos ataques 0--8,8\% & 6,0 \\
 Iqbal \textit{et al.}~\cite{Iqbal2026} (2026) & WUSTL-IIoT-2021, X-IIoTID & RF + MLP (DeepGuard) & S & Controlador SDN & Bloqueio, quarentena em VLAN e contramedidas por domínio & \textit{Hardware} real (Raspberry Pi 5) e \textit{offline} & Latência $<$30\,ms & 7,0 \\
-Rasheed \textit{et al.}~\cite{Rasheed2026} (2026) & SWaT, WADI, BATADAL, IIoT-Security & TAC-LSTM-GNN + ARLM & S & -- & Bloqueio adaptado ao tipo de ataque & \textit{Offline} & \nao{} (latência 15,6\,ms) & 6,0 \\
-Shukla e Agarwal~\cite{shukla2026cyber} (2026) & UNSW-NB15, CICIDS2018, BoT-IoT & ST-GT (\textit{graph transformer}) & S, SS & Não especificado & Isolamento e controlo de acesso (só conceptual) & Simulação (SUMO) & 34,9\,ms (simulação) & 7,0 \\
+Rasheed \textit{et al.}~\cite{Rasheed2026} (2026) & SWaT, WADI, BATADAL, IIoT-Security & TAC-LSTM-GNN + ARLM & S & -- & Bloqueio adaptado ao tipo de ataque & \textit{Offline} e simulação & Mitigação média em 47,8\,s (simulação) & 6,5 \\
+Shukla e Agarwal~\cite{shukla2026cyber} (2026) & UNSW-NB15, CICIDS2018, BoT-IoT & ST-GT (\textit{graph transformer}) & S, SS & Não especificado & Controlo de acesso, reencaminhamento e isolamento de nós & Simulação (SUMO) & 34,9\,ms (simulação) & 7,0 \\
 \midrule
 \textbf{Este trabalho} & IoT-23 & RF, IF, AE & S, NS, SS & \textit{Gateway} (nftables) & Quarentena do dispositivo após $k$ de $w$ fluxos, com expiração & Protótipo em contentores & $T_c$, CPU e memória (planeado) & -- \\
 \bottomrule
@@ -1454,11 +1464,12 @@ o que pressupõe equipamento que uma rede doméstica ou de um pequeno edifício 
 tem. O segundo é que poucos estudos medem a contenção em si: entre os que o fazem, os
 tempos vão de milissegundos~\cite{toony2024multiblock,shukla2026cyber} e décimas de
 segundo~\cite{ramirezmartinez2025p4,kponyo2020lightweight} a alguns
-segundos~\cite{andrade2024ddos,karam2025isaaf,srilekha2025hybrid}, e os valores mais baixos
-são obtidos em emulação ou simulação. O terceiro é que, em 14 dos 31 estudos, a
+segundos~\cite{andrade2024ddos,karam2025isaaf,srilekha2025hybrid} e, em simulação, a
+dezenas de segundos~\cite{Rasheed2026}; os valores mais baixos são obtidos em emulação ou
+simulação. O terceiro é que, em 10 dos 31 estudos, a
 resposta não chega a ser avaliada numa rede: é apenas descrita, avaliada só
 \textit{offline} sobre o \textit{dataset} ou anunciada sem ser
-implementada~\cite{dange2025dual,tawfik2021internet,saurabh2022mlaps,rawat2024intelligent,Rasheed2026,Arulkumar2026,Chaudhary2025,shukla2026cyber,hussain2026postquantum,verma2024petrak,garba2024sdn,tariq2025saegru,kumar2025advanced,karibandi2025cyberdome}.
+implementada~\cite{dange2025dual,tawfik2021internet,saurabh2022mlaps,rawat2024intelligent,Arulkumar2026,Chaudhary2025,hussain2026postquantum,verma2024petrak,tariq2025saegru,kumar2025advanced}.
 O quarto é que só sete trabalhos foram testados em \textit{hardware}
 real~\cite{ravi2020semisupervised,dange2025dual,kponyo2020lightweight,Iqbal2026,karam2025isaaf,srilekha2025hybrid,garba2024sdn},
 e os que medem o tempo de contenção nesse \textit{hardware} ou tratam apenas
@@ -1466,8 +1477,12 @@ e os que medem o tempo de contenção nesse \textit{hardware} ou tratam apenas
 levam alguns segundos a reagir~\cite{karam2025isaaf,srilekha2025hybrid}.
 Nenhum dos estudos comparados junta, num \textit{gateway} comum, a extração de fluxos, a
 comparação entre modelos supervisionados e não supervisionados e uma quarentena
-automática com o tempo de contenção medido. É esse o espaço que a solução proposta
-procura ocupar.
+automática com o tempo de contenção medido. O mais próximo é o ISAAF, que corre num
+\textit{gateway} Raspberry Pi em \textit{hardware} real e mede o tempo de deteção e de
+bloqueio~\cite{karam2025isaaf}, mas usa apenas modelos supervisionados e bloqueia o IP
+e a porta do \textit{broker} MQTT, em vez de isolar o dispositivo. É a combinação dos
+quatro elementos, e em particular a comparação entre famílias de modelos quanto ao efeito
+na contenção, que a solução proposta procura acrescentar.
 
 % =====================================================================
 \section{Solução proposta}\label{sec:proposta}
@@ -1489,8 +1504,11 @@ O cenário de teste é montado com contentores Docker num único computador, o q
 repetir as experiências sem \textit{hardware} dedicado e sem pôr em risco outras redes
 (Fig.~\ref{fig:arquitetura}). Há duas redes virtuais. Na rede IoT estão um ou dois
 contentores que fazem de dispositivos e um contentor atacante; na rede externa está um
-servidor que representa a Internet. O \textit{gateway} liga as duas redes,
-encaminha o tráfego entre elas e concentra quatro módulos:
+servidor que representa a Internet. Cada contentor da rede IoT fica numa sub-rede
+própria, ligada ao \textit{gateway}; caso contrário, os dispositivos comunicariam
+diretamente pela \textit{bridge} do Docker e o movimento lateral, como o varrimento da
+própria rede por um dispositivo infetado, não passaria pelo \textit{gateway}. O
+\textit{gateway} liga as redes, encaminha o tráfego entre elas e concentra quatro módulos:
 \begin{enumerate}
   \item \textbf{Captura e extração de fluxos.} O Zeek~\cite{paxson1999bro} observa a
   interface da rede IoT e escreve um registo por ligação (\texttt{conn.log}), com
@@ -1540,6 +1558,15 @@ com o \texttt{tcprewrite} para corresponderem aos dos contentores. Para o
 \caption{Arquitetura do sistema proposto, em contentores Docker.}\label{fig:arquitetura}
 \end{figure}
 
+Há três cuidados de implementação. O primeiro é que o Zeek só escreve uma ligação no
+\texttt{conn.log} quando esta termina ou expira, o que atrasaria a deteção de ligações
+longas, como as de C\&C; por isso as \textit{features} são também calculadas por
+intervalos durante a ligação. O segundo é a ordem das regras: a regra de quarentena
+fica antes da regra que aceita as ligações já estabelecidas, para que estas também
+sejam cortadas. O terceiro é a velocidade de reprodução das capturas, que é mantida
+constante entre cenários, porque altera a duração e os intervalos entre pacotes, que
+são \textit{features} dos modelos.
+
 A escolha do IoT-23 tem uma vantagem prática importante: as capturas são distribuídas
 com os registos \texttt{conn.log} do Zeek já rotulados. Os modelos são, por isso,
 treinados com as mesmas \textit{features} que o \textit{gateway} calcula em
@@ -1584,7 +1611,11 @@ positivos esperada.
 
 Para evitar resultados otimistas, a divisão entre treino e teste é feita por captura e
 não por fluxo: os fluxos de uma mesma captura do IoT-23 ficam todos do mesmo lado. Assim
-o modelo nunca é testado com tráfego quase idêntico ao que viu no treino.
+o modelo nunca é testado com tráfego quase idêntico ao que viu no treino. Os endereços
+IP, os identificadores das ligações e as marcas temporais são excluídos das
+\textit{features}, e a porta de destino é usada com cuidado, porque no IoT-23 a porta 23
+quase basta para identificar o tráfego malicioso e o modelo aprenderia esse atalho em vez
+do comportamento.
 
 \subsection{Decisão e contenção}\label{sec:decisao}
 Isolar um dispositivo por causa de um único fluxo suspeito seria arriscado, porque
@@ -1623,8 +1654,18 @@ decorre em três cenários:
   treino, como a Mirai;
   \item \textbf{S3, ataque não visto:} reprodução de capturas de uma família excluída do
   treino, para comparar a \textit{Random Forest} com os modelos que só aprendem o
-  comportamento normal.
+  comportamento normal. A família é escolhida entre as que não fazem varrimento de portas,
+  como a Torii, porque muitas famílias do IoT-23 são variantes da Mirai com um
+  comportamento quase igual, que a \textit{Random Forest} detetaria na mesma.
 \end{itemize}
+
+Os três modelos são comparados no mesmo ponto de funcionamento, isto é, com o limiar de
+cada um ajustado para a mesma FPR, para que a comparação não dependa da escolha do
+limiar. Como referência sem ML, usa-se o detetor de varrimentos do próprio Zeek. Há
+ainda uma limitação conhecida: o IoT-23 tem poucas capturas de tráfego benigno, de
+apenas três dispositivos, pelo que os modelos que só aprendem o comportamento normal
+podem ter uma FPR alta no cenário S1 por encontrarem dispositivos que nunca viram, e não
+por causa de ataques.
 
 A deteção é avaliada \textit{offline} com as métricas que derivam da matriz de
 confusão~\cite{sokolova2009systematic}, onde TP, FP, FN e TN são os verdadeiros positivos,
@@ -1734,7 +1775,7 @@ Princípio (§2.1) & & Na solução proposta \\
 \midrule
 1. Todas as fontes de dados e serviços são recursos & \checkok & Cada dispositivo IoT é tratado como recurso com política própria \\
 2. Comunicação protegida, qualquer que seja a localização & \nao & Fora do âmbito: muitos IoT não suportam cifra robusta \\
-3. Acesso concedido por sessão & $\sim$ & Cada fluxo é avaliado; o acesso pode ser cortado a meio \\
+3. Acesso concedido por sessão & $\sim$ & Cada fluxo é avaliado; a quarentena corta também as ligações já abertas \\
 4. Acesso decidido por política dinâmica & \checkok & A política muda com o comportamento observado (Eq.~\ref{eq:decisao}) \\
 5. Monitorizar a integridade e a postura de todos os ativos & \checkok & Detetor ML sobre os fluxos de cada dispositivo \\
 6. Autenticação e autorização dinâmicas antes do acesso & $\sim$ & Autorização revista em contínuo; sem autenticação forte \\
@@ -1760,11 +1801,11 @@ pedido isoladamente, de algoritmos contextuais, que usam o histórico recente do
 e por isso detetam comportamentos atípicos. Em notação, um algoritmo por pontuação pode
 escrever-se como
 \begin{equation}
-C = \sum_{m} w_m\, s_m, \qquad
-\text{acesso} \iff C \le L_{\text{recurso}},
+C = \sum_{m} \alpha_m\, s_m, \qquad
+\text{acesso} \iff C < L_{\text{recurso}},
 \label{eq:zta_score}
 \end{equation}
-em que $s_m$ é o valor dado pela fonte $m$, $w_m$ o peso que a organização lhe atribui e
+em que $s_m$ é o valor dado pela fonte $m$, $\alpha_m$ o peso que a organização lhe atribui e
 $L_{\text{recurso}}$ o limiar aceite para o recurso. Aqui $C$ é escrito como nível de
 suspeita, para coincidir com o sentido das saídas dos modelos.
 
@@ -1788,7 +1829,8 @@ pontuação é a saída dos modelos: a probabilidade da \textit{Random Forest}
 (Eq.~\ref{eq:rf}), o \textit{score} do \textit{Isolation Forest} (Eq.~\ref{eq:iforest})
 ou o erro do \textit{Autoencoder} (Eq.~\ref{eq:ae}). Na versão da Parte~2 há uma só fonte
 de informação. A Eq.~\ref{eq:zta_score} reduz-se então a $C_i(t)=\frac{1}{w}\sum_{j\in
-W_i(t)} y_j$, e a quarentena é imposta quando $C_i(t) \ge k/w$, o que é exatamente a
+W_i(t)} y_j$, e, com $L_{\text{recurso}} = k/w$, o acesso é negado e a quarentena imposta quando
+$C_i(t) \ge k/w$, o que é exatamente a
 regra da Eq.~\ref{eq:decisao}. A formulação geral deixa espaço para acrescentar outras
 fontes com pesos próprios, como listas de servidores de C\&C conhecidos ou o inventário
 de dispositivos.
@@ -1864,9 +1906,12 @@ dispositivos, redes, aplicações e dados), três capacidades transversais (visi
 análise, automação e orquestração, governação) e quatro níveis de maturidade
 (tradicional, inicial, avançado e ótimo). Nos pilares que importam aqui, dispositivos e
 redes, o edifício parte do nível tradicional: rede plana, inventário manual e nenhuma
-resposta automática. A solução proposta leva a visibilidade ao nível avançado, que a
-CISA associa à deteção de anomalias automática na rede. Aproxima a automação do nível
-ótimo, que prevê processos automáticos para monitorizar, isolar e remediar dispositivos.
+resposta automática. A solução proposta leva a visibilidade e a automação ao nível
+avançado, que a CISA associa à deteção automática de anomalias na rede e ao isolamento
+automático de dispositivos. O nível ótimo, que prevê também a remediação automática, fica
+fora do âmbito. O protótipo da Parte~2 entrega a deteção e a quarentena automáticas; o
+inventário a partir dos fluxos e a microssegmentação por classe de dispositivo pertencem
+ao cenário do edifício e ao plano de transição descrito a seguir.
 Ali \textit{et al.}~\cite{ali2022maturity} resumem bem este passo ao afirmar que a função
 central da automação é converter a deteção de ameaças em prevenção.
 
@@ -1882,9 +1927,9 @@ dispositivos, como se viu, a identidade forte não é realista.
 \toprule
 Pilar / função & Situação de partida & Com a solução proposta \\
 \midrule
-Dispositivos: visibilidade e análise & Inventário manual, sem deteção (tradicional) & Inventário a partir dos fluxos e deteção automática de anomalias (avançado) \\
-Dispositivos: automação & Isolamento manual, quando existe (tradicional) & Quarentena automática com expiração e renovação (entre avançado e ótimo) \\
-Redes: segmentação & Rede plana (tradicional) & Microssegmentação por classe, com o \textit{gateway} como PEP (avançado) \\
+Dispositivos: visibilidade e análise & Inventário manual, sem deteção (tradicional) & Deteção automática de anomalias (avançado); inventário a partir dos fluxos no plano de transição \\
+Dispositivos: automação & Isolamento manual, quando existe (tradicional) & Quarentena automática com expiração e renovação (avançado) \\
+Redes: segmentação & Rede plana (tradicional) & Microssegmentação por classe, com o \textit{gateway} como PEP (avançado, no plano de transição; o protótipo isola cada dispositivo) \\
 Redes: visibilidade e análise & Monitorização só na fronteira (tradicional) & Deteção de anomalias com ML em todo o tráfego IoT (avançado) \\
 Identidade & Contas locais sem MFA (tradicional) & MFA no acesso dos administradores ao PDP (inicial) \\
 \bottomrule
@@ -1962,9 +2007,9 @@ como a solução proposta lhes responde.
 A primeira é que a contenção é anunciada com mais frequência do que é avaliada. Mesmo
 entre os estudos incluídos, que já passaram um critério de exclusão sobre a resposta
 (EC6), vários descrevem ou anunciam um mecanismo que depois não avaliam numa
-rede~\cite{elsayed2024mpguard,ibrahim2026purechain,dange2025dual,tawfik2021internet,saurabh2022mlaps,rawat2024intelligent},
-e só sete medem quanto tempo demora a conter um
-ataque~\cite{ramirezmartinez2025p4,andrade2024ddos,kponyo2020lightweight,karam2025isaaf,toony2024multiblock,srilekha2025hybrid,shukla2026cyber}.
+rede~\cite{dange2025dual,tawfik2021internet,saurabh2022mlaps,rawat2024intelligent,hussain2026postquantum,kumar2025advanced},
+e só oito medem quanto tempo demora a conter um
+ataque~\cite{ramirezmartinez2025p4,andrade2024ddos,kponyo2020lightweight,karam2025isaaf,toony2024multiblock,srilekha2025hybrid,shukla2026cyber,Rasheed2026}.
 A segunda é a dependência de infraestrutura programável. Boa parte das propostas
 pressupõe \textit{switches} P4 ou um controlador SDN, que não existem numa casa, numa
 pequena empresa ou num edifício com uma rede convencional, onde o ponto de controlo
@@ -2007,8 +2052,15 @@ protocolo. Identificam-se quatro ameaças.
 
 \textbf{Pesquisa.} A \textit{string} foi aplicada apenas ao resumo e exige termos ligados
 à resposta. Estudos que só descrevem a contenção no texto completo podem ter ficado de
-fora. No ScienceDirect foi usada uma versão reduzida da \textit{string}, e a pesquisa
-limitou-se a cinco bases, a artigos em inglês e ao período 2020--2026.
+fora, e a \textit{string} não inclui termos como \textit{containment},
+\textit{blocking} ou \textit{isolation}: o último foi retirado da primeira versão por
+devolver demasiados resultados fora do tema, e os outros dois podem ter afastado estudos
+que usam essas palavras em vez de \textit{mitigation} ou \textit{prevention}. No
+ScienceDirect foi usada uma versão reduzida da \textit{string}, a pesquisa limitou-se a
+cinco bases, a artigos em inglês e ao período 2020--2026, e 17 registos não foram
+exportados ou importados para o Parsifal. Também não foi feita pesquisa por
+\textit{snowballing}, isto é, pelas referências e pelas citações dos estudos incluídos,
+que poderia ter encontrado estudos relevantes fora das cinco bases.
 
 \textbf{Seleção.} A triagem foi dividida por blocos, cada um com um revisor. Para reduzir
 a subjetividade, os critérios foram escritos antes da triagem, os casos duvidosos
@@ -2024,7 +2076,12 @@ excluídos pelo EC6, por não proporem qualquer mecanismo de resposta: limitavam
 classificação, a um alerta ou a uma notificação ao utilizador.
 Cinco estudos foram triados por dois revisores, por aparecerem em dois blocos: em
 quatro as decisões e as pontuações coincidiram, e no quinto~\cite{karibandi2025cyberdome}
-um revisor excluiu-o (4,5) e outro incluiu-o (5,0), tendo prevalecido a inclusão.
+um revisor excluiu-o (4,5) e outro incluiu-o (5,0), tendo prevalecido a inclusão. Este
+caso mostra a sensibilidade ao limiar: meio ponto numa pergunta decide se um estudo entra.
+Pela mesma razão, a QA5 não foi tornada eliminatória: o EC6 já exige que o estudo
+proponha uma resposta, e a QA5 serve para distinguir os que a avaliam dos que só a
+descrevem. Por isso há estudos incluídos com QA5 negativa, visíveis na
+Tabela~\ref{tab:qa_resultados}.
 
 \textbf{Extração e qualidade.} A avaliação de qualidade e a extração foram feitas por um
 revisor por estudo. Em alguns artigos as tabelas e figuras não eram legíveis no texto
@@ -2044,8 +2101,8 @@ Esta revisão procurou saber como é que a análise de tráfego com ML é usada 
 e conter automaticamente dispositivos IoT comprometidos (QG). A resposta curta é que a
 deteção está madura, mas a contenção ainda não. Dos 491 estudos únicos devolvidos pela
 pesquisa, 31 cumpriram os critérios de seleção e a avaliação de qualidade. A maioria
-deteta os ataques com uma exatidão acima de 97\%, mas só 14 descrevem e avaliam o
-mecanismo de resposta, e só sete medem quanto tempo demora a conter um ataque.
+deteta os ataques com uma exatidão acima de 97\%, mas só 13 descrevem e avaliam o
+mecanismo de resposta, e só oito medem quanto tempo demora a conter um ataque.
 
 Quanto aos modelos e às \textit{features} (QF1), domina a aprendizagem supervisionada: a
 RF, as árvores de decisão, o KNN e a SVM aparecem ao lado de redes CNN, LSTM e GRU,
@@ -2065,13 +2122,12 @@ Quanto à resposta (QF3), o descarte ou o bloqueio de tráfego é a medida mais 
 estudos isolam o dispositivo inteiro. A resposta é aplicada sobretudo em controladores
 SDN ou \textit{switches} P4 (12 estudos) e em \textit{gateways} ou nós \textit{edge} (12).
 Os estudos mais cuidadosos não reagem a um único alerta: exigem evidência acumulada ou
-usam modelos de decisão, como a aprendizagem por reforço. Em quatro, pelo contrário, a
+usam modelos de decisão, como a aprendizagem por reforço. Em três, pelo contrário, a
 resposta é proposta mas não chega a ser implementada.
 
-Quanto à avaliação (QF4), sete estudos são avaliados apenas \textit{offline} e só sete
-correm em \textit{hardware} real. Na maioria dos casos em que o tempo de contenção é
-medido, a deteção demora uma a duas ordens de grandeza mais do que a resposta, dezenas de
-segundos contra décimas de segundo. O custo computacional é reportado de forma desigual e
+Quanto à avaliação (QF4), seis estudos são avaliados apenas \textit{offline} e só sete
+correm em \textit{hardware} real. Nos três estudos que medem a deteção e a resposta em
+separado, a deteção é a parcela dominante: 17 a 140\,s, contra 0,13 a 4\,s da resposta. O custo computacional é reportado de forma desigual e
 raramente no equipamento onde a deteção corre.
 
 A comparação das Tabelas~\ref{tab:comparacao} e~\ref{tab:comparacao2} mostra a lacuna
