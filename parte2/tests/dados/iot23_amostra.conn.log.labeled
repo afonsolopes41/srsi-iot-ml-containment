@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2018-12-21-15-50-14
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents   label   detailed-label
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]   string   string
+1545403816.962094	CrDn63WjJEmrWGjqf	192.168.1.195	41040	185.244.25.235	80	tcp	-	3.139211	0	0	S0	-	-	0	S	3	180	0	0	-   Benign   -
+1545403824.181240	CY9lJW3gh1Eje4usP6	192.168.1.195	41040	185.244.25.235	80	tcp	-	-	-	-	S0	-	-	0	S	1	60	0	0	-   Malicious   PartOfAHorizontalPortScan
+1545403828.000000	Cabc	192.168.1.195	51270	62.210.128.43	53	udp	dns	0.019	37	106	SF	-	-	0	Dd	1	65	1	134	(empty)   Malicious   C&C-HeartBeat
+#close	2018-12-22-15-50-14

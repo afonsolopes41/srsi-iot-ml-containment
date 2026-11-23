@@ -1,0 +1,110 @@
+# SRSI – Parte 2: banco de ensaio em contentores (Secção "Solução proposta", Fig. arquitetura).
+#
+#   device1 (10.10.1.10) ─ iot1 ─┐
+#   device2 (10.10.2.10) ─ iot2 ─┼─ gateway (.254 em cada rede) ─ ext ─ server (10.20.0.10, "Internet")
+#   attacker(10.10.3.10) ─ iot3 ─┘
+#
+# Cada contentor IoT tem uma sub-rede própria ligada ao gateway: o tráfego entre
+# dispositivos (movimento lateral) passa obrigatoriamente pelo gateway.
+# Todas as redes são "internal": nada sai do computador (requisito ético do relatório).
+#
+# Uso:  docker compose up -d --build      (ver README.md)
+
+name: srsi
+
+x-node: &node
+  build: ./node
+  image: srsi/node:0.1
+  cap_add: [NET_ADMIN, NET_RAW]
+  volumes:
+    - ./logs:/logs
+    - ./pcaps:/pcaps:ro
+    - ./node/replay:/opt/replay:ro
+  depends_on: [gateway]
+  init: true
+
+services:
+  gateway:
+    build: ./gateway
+    image: srsi/gateway:0.1
+    hostname: gateway
+    cap_add: [NET_ADMIN, NET_RAW]
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      # Respostas reproduzidas a partir da rede IoT (origem = IP "da Internet") são vistas
+      # pelo Zeek (espelho tc antes do netfilter) mas não são encaminhadas.
+      net.ipv4.conf.all.rp_filter: "1"
+      net.ipv4.conf.all.send_redirects: "0"
+    environment:
+      INTERNET_NEXT_HOP: 10.20.0.10      # rota por omissão do gateway = servidor "Internet"
+      QUARANTINE_TIMEOUT: 300s           # expiração por omissão do set de quarentena
+      ZEEK_INTERIM_EVERY: 30sec          # intervalo dos registos parciais (conn_interim.log)
+    networks:
+      iot1: { ipv4_address: 10.10.1.254, mac_address: "02:00:0a:0a:01:fe" }
+      iot2: { ipv4_address: 10.10.2.254, mac_address: "02:00:0a:0a:02:fe" }
+      iot3: { ipv4_address: 10.10.3.254, mac_address: "02:00:0a:0a:03:fe" }
+      ext:  { ipv4_address: 10.20.0.254, mac_address: "02:00:0a:14:00:fe" }
+    volumes:
+      - ./logs:/logs
+      - ./gateway/zeek:/opt/srsi/zeek:ro
+      - ./gateway/nft:/opt/srsi/nft:ro
+      - ./src:/opt/srsi/src:ro           # pacote Python partilhado (deteção, decisão, contenção)
+      - ./models:/opt/srsi/models:ro     # modelos treinados (ver docs/interfaces.md §3)
+    init: true
+
+  device1:
+    <<: *node
+    hostname: device1
+    environment:
+      ROLE: device
+      GATEWAY: 10.10.1.254
+      SERVER: 10.20.0.10
+      HEARTBEAT_S: "5"
+    networks:
+      iot1: { ipv4_address: 10.10.1.10, mac_address: "02:00:0a:0a:01:0a" }
+
+  device2:
+    <<: *node
+    hostname: device2
+    environment:
+      ROLE: device
+      GATEWAY: 10.10.2.254
+      SERVER: 10.20.0.10
+      HEARTBEAT_S: "5"
+    networks:
+      iot2: { ipv4_address: 10.10.2.10, mac_address: "02:00:0a:0a:02:0a" }
+
+  attacker:
+    <<: *node
+    hostname: attacker
+    environment:
+      ROLE: attacker
+      GATEWAY: 10.10.3.254
+      SERVER: 10.20.0.10
+      HEARTBEAT_S: "5"                   # permite ver o corte no momento da quarentena
+    networks:
+      iot3: { ipv4_address: 10.10.3.10, mac_address: "02:00:0a:0a:03:0a" }
+
+  server:
+    <<: *node
+    hostname: server
+    environment:
+      ROLE: server
+      GATEWAY: 10.20.0.254
+      IOT_NET: 10.10.0.0/16
+    networks:
+      ext: { ipv4_address: 10.20.0.10, mac_address: "02:00:0a:14:00:0a" }
+
+networks:
+  iot1:
+    internal: true
+    ipam: { config: [ { subnet: 10.10.1.0/24, gateway: 10.10.1.1 } ] }
+  iot2:
+    internal: true
+    ipam: { config: [ { subnet: 10.10.2.0/24, gateway: 10.10.2.1 } ] }
+  iot3:
+    internal: true
+    ipam: { config: [ { subnet: 10.10.3.0/24, gateway: 10.10.3.1 } ] }
+  ext:
+    internal: true
+    ipam: { config: [ { subnet: 10.20.0.0/24, gateway: 10.20.0.1 } ] }

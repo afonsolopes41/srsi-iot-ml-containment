@@ -1,0 +1,6 @@
+# Versões fixas: o gateway tem de carregar exatamente os mesmos objetos que o treino gravou.
+# Manter igual a parte2/requirements.txt.
+numpy==2.4.4
+pandas==3.0.5
+scikit-learn==1.9.1
+joblib==1.6.0

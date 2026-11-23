@@ -1,0 +1,16 @@
+[project]
+name = "srsi"
+version = "0.1.0"
+description = "SRSI Parte 2 – deteção e contenção automática de dispositivos IoT comprometidos"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

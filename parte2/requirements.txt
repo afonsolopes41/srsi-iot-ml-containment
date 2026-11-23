@@ -1,0 +1,9 @@
+# Ambiente de desenvolvimento e treino (Python >= 3.11). As 4 primeiras linhas têm de ser
+# iguais a gateway/requirements.txt, senão os modelos gravados podem não carregar no gateway.
+numpy==2.4.4
+pandas==3.0.5
+scikit-learn==1.9.1
+joblib==1.6.0
+pyarrow==26.0.1
+matplotlib
+pytest

@@ -17,7 +17,7 @@ Docentes: Prof. Valderi Reis Quietinho Leithardt e Prof. Maurício Machado da Ro
 O projeto tem duas partes:
 
 - **Parte 1 – Revisão sistemática da literatura (RSL).** Como é que a análise de tráfego com *machine learning* é usada para detetar e conter automaticamente dispositivos IoT comprometidos. A revisão partiu de 677 resultados em cinco bases de dados e incluiu 31 estudos. Termina com a proposta da arquitetura a implementar na Parte 2 e com o seu enquadramento numa arquitetura *Zero Trust* (NIST SP 800-207).
-- **Parte 2 – Protótipo.** Um *gateway* em contentores Docker que extrai fluxos com o Zeek, compara *Random Forest*, *Isolation Forest* e *autoencoder* sobre o IoT-23 e coloca automaticamente em quarentena, com nftables, os dispositivos suspeitos. *(Ainda não realizada.)*
+- **Parte 2 – Protótipo.** Um *gateway* em contentores Docker que extrai fluxos com o Zeek, compara *Random Forest*, *Isolation Forest* e *autoencoder* sobre o IoT-23 e coloca automaticamente em quarentena, com nftables, os dispositivos suspeitos. *(Em curso: ver [`parte2/`](parte2/README.md) e o [plano](parte2/PLANO.md).)*
 
 ## Estrutura do repositório
 
@@ -34,6 +34,7 @@ rsl/                                            Dados da revisão sistemática
   exports/secundaria/                           Exportações da string secundária (revisões já publicadas)
   extracao/data_extraction.xls                  Formulário de extração exportado do Parsifal (31 estudos)
   artigos/                                      PDF dos estudos incluídos
+parte2/                                         Protótipo (Docker, Zeek, scikit-learn, nftables): ver parte2/README.md
 ```
 
 ## Processo da revisão (resumo)

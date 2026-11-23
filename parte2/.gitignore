@@ -1,0 +1,16 @@
+# Dados e artefactos grandes: ficam na pasta partilhada do grupo (ver PLANO.md)
+data/*
+!data/README.md
+!data/splits.json
+pcaps/*
+!pcaps/README.md
+logs/
+results/**/logs/
+*.pcap
+*.pcapng
+*.parquet
+*.egg-info/
+.pytest_cache/
+
+# Amostras pequenas usadas nos testes
+!tests/dados/*.log
