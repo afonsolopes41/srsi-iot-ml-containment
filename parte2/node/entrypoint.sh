@@ -37,7 +37,7 @@ case "$ROLE" in
     echo "srsi-server ok" > /srv/www/index.html
     # Ficheiro de 2 MB para ligações longas (teste dos registos parciais e do corte de ligações estabelecidas)
     head -c 2097152 /dev/urandom > /srv/www/big.bin
-    exec busybox httpd -f -p 80 -h /srv/www
+    exec busybox-extras httpd -f -p 80 -h /srv/www
     ;;
   *)
     echo "ROLE desconhecido: $ROLE" >&2; exit 1 ;;
