@@ -1,0 +1,10 @@
+# Os scripts correm dentro de contentores Linux: têm de ter sempre fins de linha LF,
+# mesmo quando o repositório é clonado no Windows (core.autocrlf=true).
+*.sh     text eol=lf
+*.zeek   text eol=lf
+*.nft    text eol=lf
+*.py     text eol=lf
+*.yml    text eol=lf
+Dockerfile text eol=lf
+*.joblib binary
+*.pdf    binary
