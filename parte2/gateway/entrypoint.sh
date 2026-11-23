@@ -66,7 +66,14 @@ if [[ -n "${INTERNET_NEXT_HOP:-}" ]]; then
   log "rota por omissão via $INTERNET_NEXT_HOP"
 fi
 
-# 5. Zeek (diretório de trabalho = diretório dos logs)
+# 5. Detetor em segundo plano, se houver modelo escolhido (docs/interfaces.md §4)
+if [[ -n "${DETECTOR_MODEL:-}" ]]; then
+  python -m srsi.detector --model "$DETECTOR_MODEL" --zeek-dir "$ZEEK_DIR" \
+    --out "$GW_DIR/flows.jsonl" >> "$GW_DIR/detector.log" 2>&1 &
+  log "detetor iniciado com o modelo $DETECTOR_MODEL"
+fi
+
+# 6. Zeek (diretório de trabalho = diretório dos logs)
 cd "$ZEEK_DIR"
 log "a iniciar o Zeek em $MON ($(zeek --version))"
 exec zeek -C -i "$MON" /opt/srsi/zeek/local.zeek \

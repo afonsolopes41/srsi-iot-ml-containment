@@ -49,6 +49,7 @@ services:
       INTERNET_NEXT_HOP: 10.20.0.10      # rota por omissão do gateway = servidor "Internet"
       QUARANTINE_TIMEOUT: 300s           # expiração por omissão do set de quarentena
       ZEEK_INTERIM_EVERY: 30sec          # intervalo dos registos parciais (conn_interim.log)
+      DETECTOR_MODEL: ${DETECTOR_MODEL:-/opt/srsi/models/baseline-placeholder}   # vazio = sem detetor
     networks:
       iot1: { ipv4_address: 10.10.1.254, mac_address: "02:00:0a:0a:01:fe" }
       iot2: { ipv4_address: 10.10.2.254, mac_address: "02:00:0a:0a:02:fe" }
