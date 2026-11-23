@@ -32,7 +32,8 @@ case "$ROLE" in
     ;;
   server)
     ip route replace "${IOT_NET:?}" via "${GATEWAY:?}"
-    echo "[$HOST] rota $IOT_NET via $GATEWAY"
+    ip route del default 2>/dev/null || true   # o servidor não sai para lado nenhum
+    echo "[$HOST] rota $IOT_NET via $GATEWAY; sem rota por omissão"
     mkdir -p /srv/www
     echo "srsi-server ok" > /srv/www/index.html
     # Ficheiro de 2 MB para ligações longas (teste dos registos parciais e do corte de ligações estabelecidas)
