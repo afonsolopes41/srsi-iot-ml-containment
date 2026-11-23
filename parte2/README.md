@@ -7,8 +7,17 @@ com nftables. Plano e divisão de tarefas: [`PLANO.md`](PLANO.md). Contratos ent
 
 ## Arrancar o banco de ensaio
 
-Requisitos: Docker com Compose v2 (Linux, macOS, ou Windows com WSL2). No Windows, correr os
-comandos dentro do WSL2.
+Requisitos: Docker com Compose v2 (Linux, macOS, ou Windows com Docker Desktop).
+
+**No Windows**, clonar assim (os nomes dos PDF da Parte 1 excedem o limite de caminho):
+
+```powershell
+git clone -c core.longpaths=true -b parte2-esqueleto https://github.com/afonsolopes41/srsi-iot-ml-containment.git
+```
+
+e correr o `smoke_test.sh` no Git Bash. Depois de alterar `gateway/entrypoint.sh` ou um
+`Dockerfile`, usar `docker compose up -d --build` (esses ficheiros ficam dentro da imagem; os
+scripts do Zeek, as regras nftables, `src/` e `models/` são montados e basta reiniciar).
 
 ```bash
 cd parte2
