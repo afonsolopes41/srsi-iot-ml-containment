@@ -1,0 +1,42 @@
+{
+  "descricao": "Divisão do IoT-23 por captura (nunca por fluxo): todos os fluxos de uma captura ficam do mesmo lado. Ver docs/interfaces.md §1–§3.",
+  "treino": [
+    "CTU-IoT-Malware-Capture-1-1",
+    "CTU-IoT-Malware-Capture-3-1",
+    "CTU-IoT-Malware-Capture-7-1",
+    "CTU-IoT-Malware-Capture-8-1",
+    "CTU-IoT-Malware-Capture-9-1",
+    "CTU-IoT-Malware-Capture-17-1",
+    "CTU-IoT-Malware-Capture-33-1",
+    "CTU-IoT-Malware-Capture-35-1",
+    "CTU-IoT-Malware-Capture-36-1",
+    "CTU-IoT-Malware-Capture-39-1",
+    "CTU-IoT-Malware-Capture-42-1",
+    "CTU-IoT-Malware-Capture-43-1",
+    "CTU-IoT-Malware-Capture-44-1",
+    "CTU-IoT-Malware-Capture-48-1",
+    "CTU-IoT-Malware-Capture-52-1",
+    "CTU-IoT-Malware-Capture-60-1",
+    "CTU-Honeypot-Capture-4-1"
+  ],
+  "validacao": [
+    "CTU-IoT-Malware-Capture-49-1",
+    "CTU-Honeypot-Capture-5-1"
+  ],
+  "teste": [
+    "CTU-IoT-Malware-Capture-34-1",
+    "CTU-IoT-Malware-Capture-20-1",
+    "CTU-IoT-Malware-Capture-21-1",
+    "CTU-Honeypot-Capture-7-1"
+  ],
+  "cenarios": {
+    "S1": {"captura": "CTU-Honeypot-Capture-7-1", "familia": "benigno (fechadura Somfy)", "nota": "dispositivo nunca visto no treino"},
+    "S2": {"captura": "CTU-IoT-Malware-Capture-34-1", "familia": "Mirai", "nota": "família presente no treino (35-1, 43-1, 44-1, 48-1, 52-1, 7-1), captura não"},
+    "S3": {"captura": ["CTU-IoT-Malware-Capture-20-1", "CTU-IoT-Malware-Capture-21-1"], "familia": "Torii", "nota": "família fora do treino; sem varrimento; só 16 e 14 fluxos C&C"}
+  },
+  "regras": {
+    "limiar": "ajustado para FPR = 1 % nos fluxos benignos da validação (para o autoencoder = percentil 99 do erro)",
+    "autoencoder": "treinado só com os fluxos benignos (label 0) das capturas de treino",
+    "isolation_forest": "treinado sem rótulos com as capturas de treino"
+  }
+}

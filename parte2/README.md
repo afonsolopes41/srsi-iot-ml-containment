@@ -2,7 +2,7 @@
 
 *Gateway* em contentores Docker que extrai fluxos com o Zeek, deteta dispositivos IoT
 comprometidos com Random Forest, Isolation Forest e autoencoder, e põe-nos em quarentena
-com nftables. Plano e divisão de tarefas: [`PLANO.md`](PLANO.md). Contratos entre módulos:
+com nftables. Contratos entre módulos:
 [`docs/interfaces.md`](docs/interfaces.md).
 
 ## Arrancar o banco de ensaio
@@ -52,7 +52,6 @@ python scripts/make_placeholder_model.py              # modelo provisório (sem 
 
 ```
 parte2/
-  PLANO.md                 fases, divisão de tarefas, decisões em aberto
   docker-compose.yml       redes iot1–iot3 e ext, gateway e nós
   docs/interfaces.md       contratos: registo de fluxo, features, modelos, logs, nftables
   gateway/                 imagem do gateway (Afonso)
@@ -76,5 +75,6 @@ parte2/
   tests/                   pytest
   scripts/                 smoke_test.sh, utilitários
   relatorio/               relatório da Parte 2 e guião do vídeo
-  data/, pcaps/, logs/     não versionados
+  data/processed/          IoT-23 convertido (Parquet, versionado)
+  data/raw/, pcaps/, logs/ não versionados
 ```

@@ -1,5 +1,6 @@
-# Dados e artefactos grandes: ficam na pasta partilhada do grupo (ver PLANO.md)
+# Dados e artefactos grandes não vão para o Git, exceto os dados já processados (58 MB)
 data/*
+!data/processed/
 !data/README.md
 !data/splits.json
 pcaps/*
@@ -14,3 +15,6 @@ results/**/logs/
 
 # Amostras pequenas usadas nos testes
 !tests/dados/*.log
+
+# Exceção: dados processados do IoT-23 (partilhados pelo Git)
+!data/processed/*.parquet

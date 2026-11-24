@@ -25,6 +25,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from srsi.zeeklog import iter_iot23_labeled  # noqa: E402
 
 
+def nome_captura(path: Path) -> str:
+    """Nome da captura = a pasta CTU-* mais próxima acima do ficheiro."""
+    for parte in path.parents:
+        if parte.name.startswith("CTU-"):
+            return parte.name
+    return path.parent.parent.name
+
+
 def amostrar_captura(path: Path, captura: str, max_por_classe: int, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Amostragem por prioridades aleatórias: fica com os ``max_por_classe`` fluxos de menor
     chave aleatória em cada classe, o que equivale a uma amostra uniforme sem reposição."""
@@ -59,16 +67,18 @@ def main() -> None:
     ap.add_argument("--so", nargs="*", default=None, help="processar só estas capturas")
     args = ap.parse_args()
 
-    logs = sorted(args.raw.glob("CTU-*/bro/conn.log.labeled"))
+    # Procura em qualquer profundidade (no tar do Zenodo as capturas estão em
+    # opt/Malware-Project/BigDataset/IoTScenarios/, e a Honeypot-7-1 tem o log em Somfy-01/bro/).
+    logs = sorted(args.raw.rglob("conn.log.labeled"))
     if args.so:
-        logs = [p for p in logs if p.parent.parent.name in args.so]
+        logs = [p for p in logs if nome_captura(p) in args.so]
     if not logs:
-        sys.exit(f"Nenhum CTU-*/bro/conn.log.labeled em {args.raw}")
+        sys.exit(f"Nenhum conn.log.labeled em {args.raw}")
     args.out.mkdir(parents=True, exist_ok=True)
 
     resumos = []
     for i, path in enumerate(logs, 1):
-        captura = path.parent.parent.name
+        captura = nome_captura(path)
         destino = args.out / f"{captura}.parquet"
         print(f"[{i}/{len(logs)}] {captura} ({path.stat().st_size / 1e6:.0f} MB)", flush=True)
         df, resumo = amostrar_captura(path, captura, args.max_por_classe, args.seed)
