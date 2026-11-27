@@ -10,7 +10,8 @@
 # O que faz:
 #   1. tcprewrite: o IP original passa a ser o IP deste contentor (nos dois sentidos); MAC de
 #      origem = o deste contentor; MAC de destino = o do gateway (para os pacotes lá chegarem);
-#      recalcula checksums.
+#      recalcula checksums e corrige o comprimento dos cabeçalhos IP/TCP quando não bate
+#      com o pacote (--fixhdrlen; sem isto o tcprewrite salta esses pacotes).
 #   2. tcpreplay à velocidade original (sem -x/-M/-t).
 #   3. Acrescenta uma linha a /logs/<host>/replay.jsonl (docs/interfaces.md §6):
 #      t_start (1.º pacote enviado), t_end, pcap_t0 (instante do 1.º pacote NA CAPTURA ORIGINAL),
@@ -36,7 +37,7 @@ OUT=/tmp/replay_$(basename "$PCAP")
 echo "[$HOST] tcprewrite: $IP_ORIG -> $MEU_IP, MAC destino $GW_MAC"
 tcprewrite --infile="$PCAP" --outfile="$OUT" \
   --srcipmap="$IP_ORIG/32:$MEU_IP/32" --dstipmap="$IP_ORIG/32:$MEU_IP/32" \
-  --enet-smac="$MEU_MAC" --enet-dmac="$GW_MAC" --fixcsum
+  --enet-smac="$MEU_MAC" --enet-dmac="$GW_MAC" --fixcsum --fixhdrlen
 
 PCAP_T0=$(tcpdump -tt -n -r "$PCAP" -c 1 2>/dev/null | awk '{print $1}')
 mkdir -p "/logs/$HOST"
